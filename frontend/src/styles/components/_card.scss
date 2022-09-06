@@ -1,0 +1,138 @@
+.card-container {
+	width: 95%;
+	max-width: 900px;
+	background-color: $color-secondary;
+	border-radius: 7px;
+	margin: 1em auto 1em;
+	padding: 2em 2em 1em;
+	.header-card {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1em;
+		.poster {
+			display: flex;
+			text-align: center;
+			align-items: center;
+			.poster-pic {
+				width: 42px;
+				height: 42px;
+				object-fit: cover;
+				border-radius: 50%;
+				margin-right: 0.5em;
+			}
+		}
+		span {
+			font-style: italic;
+			color: rgb(41, 41, 41);
+		}
+	}
+	.update-post {
+		textarea {
+			width: 100%;
+			max-width: 100%;
+			min-height: 75px;
+			padding: 0.5em;
+			border-radius: 7px;
+		}
+		.button-container {
+			display: flex;
+			justify-content: center;
+			height: 70px;
+			.btn {
+				@extend .edit-btn;
+				margin-bottom: 0.5em;
+			}
+		}
+	}
+	.post-message {
+		padding: 0.5em;
+		background-color: white;
+		border-radius: 7px;
+		margin-bottom: 1em;
+	}
+	.reddit-link {
+		display: block;
+		margin: 0 auto;
+		width: 120px;
+		border-radius: 20px;
+		padding: 0.5em;
+		background-color: $color-tertiary;
+		text-align: center;
+		color: white;
+		&:hover {
+			transform: scale(1.01);
+		}
+		&:active {
+			transform: scale(0.99);
+		}
+	}
+	.video {
+		width: 100%;
+		height: 444px;
+	}
+	.card-pic {
+		width: 100%;
+		object-fit: cover;
+		max-height: 444px;
+		border-radius: 7px;
+		margin-bottom: 0.5em;
+	}
+	.button-container {
+		display: flex;
+		justify-content: space-between;
+		height: 25px;
+		.edit-button {
+			display: flex;
+			img {
+				filter: invert(7%) sepia(54%) saturate(2267%) hue-rotate(233deg) brightness(93%) contrast(102%);
+			}
+		}
+
+		img {
+			width: 25px;
+			height: 25px;
+			margin-left: 0.2em;
+			cursor: pointer;
+			transition: $short-anim;
+			&:hover {
+				transform: scale(1.02);
+			}
+		}
+	}
+	.card-footer {
+		text-align: right;
+		.like-container {
+			font-size: 1.5em;
+			font-weight: 600;
+			color: $color-primary;
+			img {
+				filter: invert(43%) sepia(88%) saturate(7134%) hue-rotate(2deg) brightness(102%) contrast(104%);
+			}
+		}
+		img {
+			width: 32px;
+			height: 32px;
+			cursor: pointer;
+			transition: $short-anim;
+			&:hover {
+				transform: scale(1.02);
+			}
+		}
+		.comment-icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			img {
+				border: 1px solid $color-tertiary;
+				border-radius: 10px;
+				width: 62px;
+				height: 62px;
+				padding: 0.5em;
+				background-color: #ffd7d7;
+				filter: brightness(1.1);
+				margin-bottom: 0.5em;
+			}
+		}
+	}
+}

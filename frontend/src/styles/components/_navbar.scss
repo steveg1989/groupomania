@@ -1,0 +1,28 @@
+.nav-container {
+	padding: 1.1em 1em 0.8em;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: hsla(176, 93%, 45%, 0.995);
+	.logo {
+		width: 250px;
+		object-fit: contain;
+	}
+	ul {
+		display: flex;
+		justify-content: flex-end;
+		width: 250px;
+	}
+	.profile-pic {
+		border-radius: 100%;
+		width: 42px;
+		height: 42px;
+		border: solid 1px $color-tertiary;
+		margin-right: 1em;
+	}
+	.logout {
+		width: 32px;
+		height: 32px;
+		cursor: pointer;
+	}
+}
