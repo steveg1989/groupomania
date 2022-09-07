@@ -33,9 +33,9 @@ module.exports.signUp = async (req, res) => {
 
 // signin
 module.exports.signIn = async (req, res) => {
-	const userMail = req.body.email;
+	const userMail = req.body.mail;
 	console.log(userMail);
-	const sqlRequest = `SELECT firstname, lastname, password, id FROM users WHERE email='${userMail}'`;
+	const sqlRequest = `SELECT email, password, id FROM users WHERE email='${userMail}'`;
 
 	db.query(sqlRequest, async (err, result) => {
 		console.log(result);
@@ -45,17 +45,17 @@ module.exports.signIn = async (req, res) => {
 		
 				try {
 					const userPassword = req.body.password;
-					const hashedPassword = result[0].user.password;
+					const hashedPassword = result[0].userpassword;
 					const auth = await bcrypt.compare(userPassword, hashedPassword);
 					if (auth) {
 						// email found & password ✔️
 
 						const maxAge = 1 * (24 * 60 * 60 * 1000);
-						const userId = result[0].user_id;
+						const userId = result[0].userId;
 						const token = jwt.sign({ userId }, process.env.TOKEN_SECRET, {
 							expiresIn: maxAge,
 						});
-						delete result[0].user_password;
+						delete result[0].userpassword;
 						res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge });
 						res.status(200).json({ message: "logged", token: token });
 					} else {
