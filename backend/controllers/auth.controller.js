@@ -52,10 +52,10 @@ module.exports.signIn = async (req, res) => {
 
 						const maxAge = 1 * (24 * 60 * 60 * 1000);
 						const userId = result[0].userId;
-						const token = jwt.sign({ userId }, process.env.TOKEN_SECRET, {
-							//expiresIn: maxAge,
+						const token = jwt.sign({ userId },  {
+							expiresIn: maxAge,
 						});
-						delete result[0].userpassword;
+						delete result[0].password;
 						res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge });
 						res.status(200).json({ message: "logged", token: token });
 					} else {
