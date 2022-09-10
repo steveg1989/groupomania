@@ -13,12 +13,7 @@ const SignInForm = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     const error = document.querySelector(".error");
-
-    if (
-      email.length < 24 &&
-      (email.length > 6) &
-        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)
-    ) {
+    if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
       error.innerHTML = "";
 
       axios({
@@ -42,12 +37,10 @@ const SignInForm = () => {
               firstname: data.firstname,
               lastname: data.lastname,
               message: data.message,
-              token: data.token,
               userId: data.userId,
             };
             dataUserContext.updateUserdata(dataProfile);
 
-            //console.log("FROM CONTEXT", dataUserContext.dataProfile);
             navigate("/profile");
           }
         })

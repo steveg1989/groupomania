@@ -5,16 +5,18 @@ const pipeline = promisify(require("stream").pipeline);
 
 // user info
 module.exports.userInfo = (req, res, next) => {
-  const { id: userId } = req.params;
+  const userId = req.userId;
   const sqlRequest = `SELECT userId, firstname, imageurl, lastname, email FROM users WHERE userId = ${userId};`;
 
   db.query(sqlRequest, (err, result) => {
     if (err) {
       res.status(404).json({ err });
     }
-    // send data
+
+    // response data
     const user = {
       email: result[0].email,
+      userId: result[0].userId,
       firstname: result[0].firstname,
       lastname: result[0].lastname,
       img: result[0].imageurl,

@@ -26,17 +26,18 @@ module.exports.requireAuth = (req, res, next) => {
 // check jwt on every routes
 module.exports.checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
+  console.log(req.cookies);
   if (token) {
     jwt.verify(token, "hi", async (err, decodedToken) => {
       if (err) {
-        res.cookie("jwt", "", { maxAge: 1 });
         res.status(401);
       } else {
+        console.log(decodedToken);
+        req.userId = decodedToken.userId;
         next();
       }
     });
   } else {
-    res.cookie("jwt", "", { maxAge: 1 });
     res.status(401);
   }
 };

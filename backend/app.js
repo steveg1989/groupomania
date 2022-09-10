@@ -1,4 +1,5 @@
 const express = require("express");
+const app = express();
 
 // cors
 const cors = require("cors");
@@ -14,8 +15,6 @@ const { requireAuth } = require("./middlewares/auth.middleware");
 const userRoutes = require("./routes/user.routes");
 const postRoutes = require("./routes/post.routes");
 const commentRoutes = require("./routes/comment.routes");
-
-const app = express();
 
 const corsOptions = {
   origin: ["http://localhost:3000"],

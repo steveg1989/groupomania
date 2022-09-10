@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../AppContext";
-import axios from "axios";
 import UploadImg from "./UploadImg";
 import UserInfos from "./UserInfos";
 

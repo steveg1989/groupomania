@@ -5,27 +5,7 @@ import { UserContext } from "./AppContext";
 import axios from "axios";
 
 const NavBar = () => {
-  const userId = useContext(UserContext).dataProfile.userId;
-  const [userPic, setUserPic] = useState("");
-  const [userFirstName, setUserFirstName] = useState();
-
-  useEffect(() => {
-    const getPicAndName = async () => {
-      await axios({
-        method: "get",
-        url: `${process.env.REACT_APP_API_URL}api/user/${userId}`,
-      })
-        .then((res) => {
-          setUserFirstName(res.data.user_first_name);
-          setUserPic(res.data.user_picture);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    getPicAndName();
-  }, []);
+  const dataUser = useContext(UserContext);
 
   return (
     <div className="nav-container">
@@ -37,21 +17,25 @@ const NavBar = () => {
           alt="logo"
         />
       </NavLink>
-      {userId ? (
+      {dataUser.dataProfile.userId ? (
         <ul>
           <li></li>
           <li className="welcome">
             <NavLink to="/profile">
-              {userPic ? (
-                <img className="profile-pic" src={userPic} alt="profile-pic" />
+              {dataUser.dataProfile.img ? (
+                <img
+                  className="profile-pic"
+                  src={dataUser.dataProfile.img}
+                  alt="profile-pic"
+                />
               ) : (
                 <img
                   className="profile-pic"
-                  src="./assets/img/default-profile.jpeg"
+                  src="./assets/img/default-profile.jpg"
                   alt="profile-pic"
                 />
               )}
-              <h5>{userFirstName}</h5>
+              <h5>{dataUser.dataProfile.firstname}</h5>
             </NavLink>
           </li>
         </ul>

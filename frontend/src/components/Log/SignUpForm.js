@@ -33,8 +33,6 @@ const SignUpForm = () => {
       if (firstname.length < 24 && firstname.length >= 3) {
         if (lastname.length < 24 && lastname.length >= 3) {
           if (
-            mail.length < 24 &&
-            mail.length > 6 &&
             /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(mail)
           ) {
             if (password.length < 24 && password.length >= 8) {
