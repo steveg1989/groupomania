@@ -11,4 +11,4 @@ VALUES (
     'zar@gmail.com',
     '123',
     
-    
+)

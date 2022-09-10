@@ -5,23 +5,23 @@ import NewPostForm from "../components/Post/NewPostForm";
 import Thread from "../components/Thread";
 
 const Home = () => {
-	const userId = useContext(UserContext);
+  const userId = useContext(UserContext).dataProfile.userId;
 
-	return (
-		<div>
-			{!userId ? (
-				<Log />
-			) : (
-				<div className="home">
-					<div className="main">
-						<NewPostForm />
-						<Thread />
-					</div>
-					<img className="logo" src="./assets/logos/icon-left-font-monochrome-black.png" alt="logo" />
-				</div>
-			)}
-		</div>
-	);
+  return (
+    <div>
+      <div className="home">
+        <div className="main">
+          <NewPostForm />
+          <Thread />
+        </div>
+        <img
+          className="logo"
+          src="./assets/logos/icon-left-font-monochrome-black.png"
+          alt="logo"
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Home;

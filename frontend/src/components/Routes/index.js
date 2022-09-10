@@ -8,19 +8,19 @@ import Connection from "../../pages/Connection";
 import NavBar from "../NavBar";
 
 const index = () => {
-	return (
-		<div>
-			<Router>
-				<NavBar />
-				<Routes>
-					<Route path="/" exact element={<Home />} />
-					<Route path="/connection" exact element={<Connection />} />
-					<Route path="/profile" exact element={<Profile />} />
-					<Route path="*" element={<NotFound />} />
-				</Routes>
-			</Router>
-		</div>
-	);
+  return (
+    <div>
+      <Router>
+        <NavBar />
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/connection" exact element={<Connection />} />
+          <Route path="/profile" exact element={<Profile />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </div>
+  );
 };
 
 export default index;
