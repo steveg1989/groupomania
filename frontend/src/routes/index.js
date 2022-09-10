@@ -14,9 +14,6 @@ function AllRoutes() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = document.cookie;
-    console.log(token);
-
     const fetchToken = async () => {
       await axios({
         method: "get",

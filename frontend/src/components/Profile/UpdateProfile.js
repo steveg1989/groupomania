@@ -6,7 +6,6 @@ import UserInfos from "./UserInfos";
 // container for profile
 const UpdateProfile = () => {
   const dataUser = useContext(UserContext);
-  const userId = dataUser.dataProfile.userId;
   return (
     <>
       <div className="profile-container">
