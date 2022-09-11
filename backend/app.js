@@ -1,7 +1,8 @@
 const express = require("express");
+const app = express();
 
 // cors
-const corsOptions = require("./config/cors");
+const cors = require("cors");
 
 // tools
 const path = require("path");
@@ -15,9 +16,14 @@ const userRoutes = require("./routes/user.routes");
 const postRoutes = require("./routes/post.routes");
 const commentRoutes = require("./routes/comment.routes");
 
-const app = express();
+const corsOptions = {
+  origin: ["http://localhost:3000"],
+  credentials: true,
+  optionSuccessStatus: 200,
+};
 
-app.use(corsOptions);
+app.use(cors(corsOptions));
+
 app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
