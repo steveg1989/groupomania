@@ -3,9 +3,13 @@ import { UserContext } from "../components/AppContext";
 import Log from "../components/Log";
 
 const NotFound = () => {
-	const userId = useContext(UserContext);
+	// const userId = useContext(UserContext);
 
-	return <div className="not-found">{userId ? <h1>Page not found :'(</h1> : <Log />}</div>;
+	return (
+	<div className="not-found"> 
+		<h1>Page not found</h1> 
+		</div>
+  );
 };
 
 export default NotFound;
