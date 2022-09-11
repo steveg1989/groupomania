@@ -92,31 +92,59 @@ const SignUpForm = () => {
 				<form action="" onSubmit={handleRegister} id="sign-up-form">
 					<label htmlFor="firstname">First name</label>
 					<br />
-					<input type="text" name="firstname" id="firstname" onChange={(e) => setfirstname(e.target.value)} value={firstname} />
+					<input 
+						type="text" 
+						name="firstname" 
+						id="firstname" 
+						onChange={(e) => setfirstname(e.target.value)} 
+						value={firstname} 
+					/>
 					<div className="firstname error"></div>
 					<br />
 
 					<label htmlFor="lastname">Last name</label>
 					<br />
-					<input type="text" name="lastname" id="lastname" onChange={(e) => setlastname(e.target.value)} value={lastname} />
+					<input 
+						type="text" 
+						name="lastname" 
+						id="lastname" 
+						onChange={(e) => setlastname(e.target.value)} 
+						value={lastname} 
+					/>
 					<div className="lastname error"></div>
 					<br />
 
 					<label htmlFor="mail">E-mail address</label>
 					<br />
-					<input type="text" name="mail" id="mail" onChange={(e) => setmail(e.target.value)} value={mail} />
+					<input 
+						type="text" 
+						name="mail" 
+						id="mail" 
+						onChange={(e) => setmail(e.target.value)} 
+						value={mail} 
+					/>
 					<div className="mail error"></div>
 					<br />
 
 					<label htmlFor="password">Password</label>
 					<br />
-					<input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} value={password} />
+					<input 
+						type="password" 
+						name="password" 
+						id="password" 
+						onChange={(e) => setPassword(e.target.value)} 
+						value={password} 
+					/>
 					<div className="password error"></div>
 					<br />
 
 					<label htmlFor="password-conf">Confirm password</label>
 					<br />
-					<input type="password" name="password" id="password-conf" onChange={(e) => setControlPassword(e.target.value)} value={controlPassword} />
+					<input 
+						type="password" 
+						name="password" 
+						id="password-conf" 
+						onChange={(e) => setControlPassword(e.target.value)} value={controlPassword} />
 					<div className="password-confirm error"></div>
 					<br />
 					<br />
