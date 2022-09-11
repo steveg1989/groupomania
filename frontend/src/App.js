@@ -1,37 +1,36 @@
-import { useEffect, useState } from "react";
-import { UserContext } from "./components/AppContext";
-import Routes from "./components/Routes";
-import axios from "axios";
+import { UserContext , } from "./components/AppContext";
+import { BrowserRouter as Router } from "react-router-dom";
+
+import AllRoutes from "./routes";
 
 function App() {
-	const [userId, setUserId] = useState(null);
+	let dataProfile = {
+		email: "",
+		firstname: "",
+		lastname: "",
+		message: "",
+		token: "",
+		userId: "",
+	};
 
-	useEffect(() => {
-		const fetchToken = async () => {
-			await axios({
-				method: "get",
-				url: `${process.env.REACT_APP_API_URL}jwtid`,
-				withCredentials: true,
-			})
-				.then((res) => {
-					setUserId(res.data.userId);
-				})
-				.catch((err) => {
-					setUserId(false);
-				});
-		};
-		fetchToken();
-
-		if (userId);
-	}, [userId]);
-
+	const updateUserdata = (data) => {
+		dataProfile.email = data.email;
+		dataProfile.firstname = data.firstname;
+		dataProfile.lastname = data.lastname;
+		dataProfile.message = data.message;
+		dataProfile.token = data.token;
+		dataProfile.userId = data.userId;
+	};
+			
 	return (
-		<div className="app">
-			<UserContext.Provider value={userId}>
-				<Routes />
-			</UserContext.Provider>
-		</div>
-	);
+    <div className="app">
+      <UserContext.Provider value={{ dataProfile, updateUserdata }}>
+        <Router>
+          <AllRoutes />
+        </Router>
+      </UserContext.Provider>
+    </div>
+  );
 }
 
 export default App;
