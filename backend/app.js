@@ -1,11 +1,14 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 
 // cors
 const cors = require("cors");
 
+// make uploads folder static
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // tools
-const path = require("path");
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 

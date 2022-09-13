@@ -31,6 +31,7 @@ function AllRoutes() {
               lastname: data.lastname,
               message: data.message,
               userId: data.userId,
+              img_profile: data.img_profile,
             };
             dataUserContext.updateUserdata(dataProfile);
             navigate("/profile");

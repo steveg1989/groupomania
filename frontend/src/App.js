@@ -10,6 +10,7 @@ function App() {
     lastname: "",
     message: "",
     userId: "",
+    img_profile: "",
   };
 
   const updateUserdata = (data) => {
@@ -18,6 +19,7 @@ function App() {
     dataProfile.lastname = data.lastname;
     dataProfile.message = data.message;
     dataProfile.userId = data.userId;
+    dataProfile.img_profile = data.img_profile;
   };
 
   return (
