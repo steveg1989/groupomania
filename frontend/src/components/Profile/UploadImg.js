@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../AppContext";
 
-const UploadImg = ({ userId, userFirstName }) => {
+const UploadImg = () => {
   const [file, setFile] = useState();
   const dataUserContext = useContext(UserContext);
 
@@ -15,7 +15,6 @@ const UploadImg = ({ userId, userFirstName }) => {
       method: "post",
       baseURL: `${process.env.REACT_APP_API_URL}api/user/upload`,
       withCredentials: true,
-
       data: formData,
     })
       .then((res) => {
