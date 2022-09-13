@@ -3,8 +3,11 @@ import { UserContext } from "../components/AppContext";
 import UpdateProfile from "../components/Profile/UpdateProfile";
 
 const Profile = () => {
-  const data = useContext(UserContext);
-  const userId = data.dataProfile.userId;
+  const userId = useContext(UserContext).dataProfile.userId;
+  if (!userId) {
+    window.location = "/connection";
+  }
+
   return (
     <div>
       <div className="profile-page">
