@@ -57,6 +57,7 @@ const UploadImg = ({ userId, userFirstName }) => {
 			<div className="profile-img">{userPic ? <img className="profile-pic" src={userPic} alt="profile-pic" /> : <img className="profile-pic" src="./assets/img/default.jpg" alt="profile-pic" />}</div>
 			<div></div>
 
+
 			<form action="" onSubmit={handlePicture} className="upload-pic">
 				<input type="file" id="file" name="file" accept=".jpg, .jpeg, .png" onChange={(e) => setFile(e.target.files[0])} />
 				<br />
