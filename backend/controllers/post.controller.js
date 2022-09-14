@@ -7,7 +7,13 @@ const pipeline = promisify(require("stream").pipeline);
 module.exports.createPost = async (req, res, next) => {
 	if (req.file !== null) {
 		try {
-			if (req.file.detectedMimeType != "image/jpg" && req.file.detectedMimeType != "image/png" && req.file.detectedMimeType != "image/jpeg" && req.file.detectedMimeType != "image/gif") throw Error("invalid file");
+			if (
+				req.file.detectedMimeType != "image/jpg" && 
+				req.file.detectedMimeType != "image/png" && 
+				req.file.detectedMimeType != "image/jpeg" && 
+				req.file.detectedMimeType != "image/gif"
+				) 
+				throw Error("invalid file");
 			if (req.file.size > 2500000) throw Error("max size");
 		} catch (err) {
 			return res.status(201).json({ err });
