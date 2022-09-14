@@ -1,41 +1,14 @@
 const express = require("express");
+const path = require("path");
 const app = express();
-
-const multer = require('multer');
-const upload = multer({dest:'uploads/'}).single("profile_image");
-
-// this code goes inside the object passed to multer()
-function fileFilter (req, file, cb) {    
-  // Allowed ext
-   const filetypes = /jpeg|jpg|png|gif/;
-
- // Check ext
-  const extname =  filetypes.test(path.extname(file.originalname).toLowerCase());
- // Check mime
- const mimetype = filetypes.test(file.mimetype);
-
- if(mimetype && extname){
-     return cb(null,true);
- } else {
-     cb('Error: Images Only!');
- }
-}
-app.post("/image", (req, res) => {
-  upload(req, res, (err) => {
-   if(err) {
-     res.status(400).send("Something went wrong!");
-   }
-   res.send(req.file);
- });
-});
-
-
 
 // cors
 const cors = require("cors");
 
+// make uploads folder static
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // tools
-const path = require("path");
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 
