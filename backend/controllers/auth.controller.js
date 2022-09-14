@@ -35,7 +35,7 @@ module.exports.signUp = async (req, res) => {
 // signin
 module.exports.signIn = async (req, res) => {
   const usermail = req.body.email.trim();
-  const sqlRequest = `SELECT email, password, firstname, lastname, userId FROM users WHERE email='${usermail}'`;
+  const sqlRequest = `SELECT email, password, firstname, lastname, imageurl, userId FROM users WHERE email='${usermail}'`;
 
   db.query(sqlRequest, async (err, result) => {
     console.log(result);
@@ -66,6 +66,7 @@ module.exports.signIn = async (req, res) => {
             userId: result[0].userId,
             firstname: result[0].firstname,
             lastname: result[0].lastname,
+            img_profile: result[0].imageurl,
           });
         } else {
           res.status(200).json({
