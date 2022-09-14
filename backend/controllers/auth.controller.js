@@ -21,14 +21,14 @@ module.exports.signUp = async (req, res) => {
 		db.query(sqlRequest, (err, result) => {
 			if (err) {
 				const errors = Errors(err);
-				res.status(200).json({ errors });
+				res.status(400).json({ errors });
 				return;
 			} else {
 				res.status(201).json({ message: "user created, welcome " + user.firstname });
 			}
 		});
 	} catch (err) {
-		res.status(200).json({ message: "register failed", err });
+		res.status(400).json({ message: "register failed", err });
 	}
 };
 
