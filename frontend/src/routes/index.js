@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../components/AppContext";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
@@ -31,6 +31,7 @@ function AllRoutes() {
               lastname: data.lastname,
               message: data.message,
               userId: data.userId,
+              img_profile: data.img_profile,
             };
             dataUserContext.updateUserdata(dataProfile);
             navigate("/profile");

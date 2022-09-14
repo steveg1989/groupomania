@@ -22,10 +22,12 @@ const NavBar = () => {
           <li></li>
           <li className="welcome">
             <NavLink to="/profile">
-              {dataUser.dataProfile.img ? (
+              {dataUser.dataProfile.img_profile  ? (
                 <img
                   className="profile-pic"
-                  src={dataUser.dataProfile.img}
+                  src={
+                    "http://localhost:3001" + dataUser.dataProfile.img_profile
+                  }
                   alt="profile-pic"
                 />
               ) : (

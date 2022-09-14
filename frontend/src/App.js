@@ -9,8 +9,8 @@ function App() {
 		firstname: "",
 		lastname: "",
 		message: "",
-		token: "",
 		userId: "",
+		img_profile: "",
 	};
 
 	const updateUserdata = (data) => {
@@ -18,8 +18,8 @@ function App() {
 		dataProfile.firstname = data.firstname;
 		dataProfile.lastname = data.lastname;
 		dataProfile.message = data.message;
-		dataProfile.token = data.token;
 		dataProfile.userId = data.userId;
+		dataProfile.img_profile = data.img_profile;
 	};
 			
 	return (
