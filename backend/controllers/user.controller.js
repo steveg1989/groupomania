@@ -6,7 +6,7 @@ const pipeline = promisify(require("stream").pipeline);
 // user info
 module.exports.userInfo = (req, res, next) => {
 	const userId = req.userId;
-	const sqlRequest = `SELECT userId, firstname, imageurl, lastname, email FROM users WHERE userid = ${userId};`;
+	const sqlRequest = `SELECT userId, firstname, imageurl, lastname, email FROM users WHERE userId = ${userId};`;
 
 	db.query(sqlRequest, (err, result) => {
 		if (err) {
