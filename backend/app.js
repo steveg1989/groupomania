@@ -1,9 +1,12 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-
+const expressHbs = require("express-handlebars");
 // cors
 const cors = require("cors");
+
+// Templating engine
+
 
 // make uploads folder static
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));

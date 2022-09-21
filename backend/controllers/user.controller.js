@@ -19,7 +19,7 @@ module.exports.userInfo = (req, res, next) => {
 			userId: result[0].userId,
 			firstname: result[0].firstname,
 			lastname: result[0].lastname,
-			img: result[0].imageurl,
+			img_profile: result[0].imageurl,
 		};
 			res.status(200).json(user);
 	});

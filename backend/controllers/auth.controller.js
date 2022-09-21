@@ -89,7 +89,8 @@ module.exports.logout = (req, res) => {
 
 // delete account
 module.exports.deleteAccount = (req, res, next) => {
-	const sqlRequest = `UPDATE user SET isDeleted = 1 WHERE user_id = ${req.params.id}`;
+  console.log("param ID", req.params.id);
+	const sqlRequest = `DELETE FROM users WHERE userId = ${req.params.id}`;
 	db.query(sqlRequest, (err, result) => {
 		if (err) {
 			res.status(200).json({ err });

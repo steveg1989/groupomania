@@ -33,7 +33,7 @@ const NavBar = () => {
               ) : (
                 <img
                   className="profile-pic"
-                  src="./assets/img/default-profile.jpg"
+                  src="./assets/img/default.jpg"
                   alt="profile-pic"
                 />
               )}

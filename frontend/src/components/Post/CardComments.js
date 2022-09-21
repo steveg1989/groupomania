@@ -75,7 +75,7 @@ const CardComments = ({ post }) => {
 					console.log(err);
 				});
 		} else {
-			alert("Veuillez entrer un message");
+			alert("Please enter a message");
 		}
 	};
 
@@ -124,11 +124,11 @@ const CardComments = ({ post }) => {
 
 	return (
 		<div className="comments-container">
-			<h2>Commentaires</h2>
+			<h2>Comments</h2>
 			<form action="" onSubmit={handleComment} className="comment-form">
-				<input type="text" name="text" onChange={(e) => setMessage(e.target.value)} value={message} placeholder="Laisser un commentaire" />
+				<input type="text" name="text" onChange={(e) => setMessage(e.target.value)} value={message} placeholder="Leave a comment" />
 				<br />
-				<input type="submit" value="Envoyer" />
+				<input type="submit" value="Send" />
 			</form>
 			{allComments.map((comment) => {
 				return (

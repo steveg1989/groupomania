@@ -114,7 +114,7 @@ const Card = ({ post }) => {
 						<textarea defaultValue={post.post_message} onChange={(e) => setTextUpdate(e.target.value)} />
 						<div className="button-container">
 							<button className="btn" onClick={updateItem}>
-								Valider modification
+							Validate modification
 							</button>
 						</div>
 					</div>
@@ -122,7 +122,7 @@ const Card = ({ post }) => {
 				{post.post_picture && <img src={post.post_picture} alt="card-pic" className="card-pic" />}
 				{post.post_reddit && (
 					<a href={post.post_reddit} className="reddit-link">
-						Lien Reddit
+						Reddit link
 					</a>
 				)}
 				{post.post_video && <iframe className="video" width="500" height="300" src={post.post_video} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title={post.poster_id}></iframe>}

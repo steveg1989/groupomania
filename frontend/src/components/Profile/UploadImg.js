@@ -13,7 +13,7 @@ const UploadImg = () => {
 
 		axios({
 			method: "post",
-			baseURL: `${process.env.REACT_APP_API_URL}api/user/upload`,
+			baseURL: `http://localhost:3001/api/user/upload`,
 			withCredentials: true,
 			data: formData,
 		})
@@ -41,7 +41,7 @@ const UploadImg = () => {
         ) : (
           <img
             className="profile-pic"
-            src="./assets/img/default-profile.jpg"
+            src="./assets/img/default.jpg"
             alt="profile-pic"
           />
         )}

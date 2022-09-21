@@ -1,11 +1,14 @@
 import axios from "axios";
-import React from "react";
+import React, { useContext } from "react";
 import Logout from "../Log/Logout";
 import cookie from "js-cookie";
+import { UserContext } from "../AppContext";
 
 const UserInfos = ({ userFirstName, userLastName, userMail, userId }) => {
 	// logout and delete account
 
+	const dataUserContext = useContext(UserContext);
+	
 	const removeCookie = (key) => {
 		if (window !== "undefined") {
 			cookie.remove(key);
