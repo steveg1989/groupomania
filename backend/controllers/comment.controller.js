@@ -2,7 +2,7 @@ const db = require("../config/db").getDB();
 
 // get all comments
 module.exports.getAllComments = async (req, res, next) => {
-	const sqlRequest = `SELECT * FROM comment WHERE comment_post_id = ${req.params.id}`;
+	const sqlRequest = `SELECT * FROM comment WHERE comment_postId = ${req.params.id}`;
 	db.query(sqlRequest, (err, result) => {
 		if (err) {
 			res.status(404).json({ err });
@@ -14,10 +14,11 @@ module.exports.getAllComments = async (req, res, next) => {
 };
 
 // create a post
-module.exports.commentPost = async (req, res, next) => {
-	const { message, commentUserId, commentUserFirstName, commentUserLastName, commentUserPicture, timestamps } = req.body;
-	const postId = req.params.id;
-	const sqlRequest = `INSERT INTO comment ( comment_post_id, comment_user_id, comment_user_first_name, comment_user_last_name, comment_user_picture, comment_message, comment_date) VALUES ( ${postId}, ${commentUserId},              "${commentUserFirstName}", "${commentUserLastName}", "${commentUserPicture}",              "${message}", "${timestamps}")`;
+module.exports.commentPost = (req, res, next) => {
+	const 
+		{postId, UserId, content} = req.body;
+	
+	const sqlRequest = `INSERT INTO comments (id, postId, userId, content) VALUES (${id}, ${postId}, ${UserId}, "${content}")`;
 	db.query(sqlRequest, (err, result) => {
 		if (err) {
 			res.status(404).json({ err });
