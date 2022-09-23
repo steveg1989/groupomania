@@ -1,13 +1,16 @@
 const router = require("express").Router();
 const postController = require("../controllers/post.controller");
 const { checkUser } = require("../middlewares/auth.middleware");
-
-const multer = require("multer");
-const upload = multer();
+const { uploadPost } = require("../middlewares/muter-upload");
 
 // posts
+router.post(
+  "/",
+  checkUser,
+  uploadPost.single("image_post"),
+  postController.createPost
+);
 router.get("/", checkUser, postController.getAllPosts);
-router.post("/", checkUser, upload.single("file"), postController.createPost);
 router.post("/:id", checkUser, postController.updatePost);
 router.delete("/:id", checkUser, postController.deletePost);
 

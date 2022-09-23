@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "../AppContext";
+import AddPost from "./AddPost";
 import UploadImg from "./UploadImg";
 import UserInfos from "./UserInfos";
 
@@ -21,6 +22,7 @@ const UpdateProfile = () => {
           userId={dataUser.dataProfile.userId}
         />
       </div>
+      <AddPost />
     </>
   );
 };

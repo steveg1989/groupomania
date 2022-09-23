@@ -1,49 +1,19 @@
 const db = require("../config/db").getDB();
-const fs = require("fs");
-const { promisify } = require("util");
-const pipeline = promisify(require("stream").pipeline);
 
 // create post
 module.exports.createPost = async (req, res, next) => {
-  if (req.file !== null) {
-    try {
-      if (
-        req.file.detectedMimeType != "image/jpg" &&
-        req.file.detectedMimeType != "image/png" &&
-        req.file.detectedMimeType != "image/jpeg" &&
-        req.file.detectedMimeType != "image/gif"
-      )
-        throw Error("invalid file");
-      if (req.file.size > 2500000) throw Error("max size");
-    } catch (err) {
-      return res.status(201).json({ err });
-    }
-
-    if (req.file.detectedMimeType == "image/gif") {
-      fileName = req.body.posterId + Date.now() + ".gif";
-    } else {
-      fileName = req.body.posterId + Date.now() + ".jpg";
-    }
-
-    const path = `${__dirname}/../../client/public/uploads/posts/${fileName}`;
-
-    await pipeline(req.file.stream, fs.createWriteStream(path));
-  }
-
+  console.log("post");
   const newPost = {
-    posterId: req.body.posterId,
-    message: req.body.message,
-    picture: req.file !== null ? "./uploads/posts/" + fileName : "",
-    video: req.body.video,
-    reddit: req.body.reddit,
-    timestamps: req.body.timestamps,
+    title: req.body.title,
+    content: req.body.content,
+    imageurl: req.file ? "/uploads/posts/" + req.file.filename : "",
   };
 
   try {
-    const sqlRequest = `INSERT INTO post (poster_id, post_message, post_picture, post_video, post_date, post_reddit ) VALUES ("${newPost.posterId}", "${newPost.message}", "${newPost.picture}", "${newPost.video}", "${newPost.timestamps}", "${newPost.reddit}")`;
+    const sqlRequest = `INSERT INTO posts (title, content, userid, imageurl ) VALUES ("${newPost.title}","${newPost.content}", "${req.userId}", "${newPost.imageurl}")`;
     db.query(sqlRequest, (err, result) => {
       if (err) {
-        res.status(500).json({ err });
+        res.status(400).json({ err });
       }
       res.status(200).json(result);
     });

@@ -2,7 +2,7 @@ const router = require("express").Router();
 const authController = require("../controllers/auth.controller");
 const userController = require("../controllers/user.controller");
 const { checkUser } = require("../middlewares/auth.middleware");
-const upload = require("../middlewares/muter-upload");
+const { uploadProfile } = require("../middlewares/muter-upload");
 
 // auth
 router.post("/register", authController.signUp);
@@ -14,7 +14,7 @@ router.get("/get-info", checkUser, userController.userInfo);
 router.post(
   "/upload",
   checkUser,
-  upload.single("profile_image"),
+  uploadProfile.single("profile_image"),
   userController.updateImgProfile
 );
 
