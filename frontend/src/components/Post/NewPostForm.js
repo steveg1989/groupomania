@@ -45,7 +45,6 @@ const NewPostForm = () => {
 			formData.append("message", message);
 			if (file) formData.append("file", file);
 			formData.append("video", video);
-			formData.append("reddit", reddit);
 			formData.append("timestamps", timestampParser(Date.now()));
 
 			axios({
@@ -85,7 +84,6 @@ const NewPostForm = () => {
 		setMessage("");
 		setPostPicture("");
 		setVideo("");
-		setReddit("");
 		setFile("");
 	};
 
@@ -107,22 +105,7 @@ const NewPostForm = () => {
 		handleVideo();
 	}, [message, video]);
 
-	// if reddit link
-	useEffect(() => {
-		const handleReddit = () => {
-			let findLink = message.split(" ");
-			for (let i = 0; i < findLink.length; i++) {
-				if (findLink[i].includes("https://www.reddit") || findLink[i].includes("https://reddit")) {
-					setReddit(findLink[i]);
-					findLink.splice(i, 1);
-					setMessage(findLink.join(" "));
-					setPostPicture("");
-				}
-			}
-		};
-
-		handleReddit();
-	}, [message, reddit]);
+	
 
 	return (
 		<div className="post-container">
@@ -151,7 +134,7 @@ const NewPostForm = () => {
 								<p>
 									{message}
 									<br />
-									{reddit && <a href={reddit}>Lien Reddit</a>}
+									{reddit && <a href={reddit}>Reddit link</a>}
 								</p>
 								{postPicture && <img src={postPicture} alt="" className="img-preview" />}
 								{video && <iframe src={video} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title={video}></iframe>}

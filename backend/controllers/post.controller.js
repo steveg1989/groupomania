@@ -1,45 +1,16 @@
 const db = require("../config/db").getDB();
-const fs = require("fs");
-const { promisify } = require("util");
-const pipeline = promisify(require("stream").pipeline);
 
 // create post
 module.exports.createPost = async (req, res, next) => {
-	if (req.file !== null) {
-		try {
-			if (
-				req.file.detectedMimeType != "image/jpg" && 
-				req.file.detectedMimeType != "image/png" && 
-				req.file.detectedMimeType != "image/jpeg" && 
-				req.file.detectedMimeType != "image/gif"
-				) 
-				throw Error("invalid file");
-			if (req.file.size > 2500000) throw Error("max size");
-		} catch (err) {
-			return res.status(201).json({ err });
-		}
-
-		if (req.file.detectedMimeType == "image/gif") {
-			fileName = req.body.posterId + Date.now() + ".gif";
-		} else {
-			fileName = req.body.posterId + Date.now() + ".jpg";
-		}
-
-		const path = `${__dirname}/../../client/public/uploads/posts/${fileName}`;
-
-		await pipeline(req.file.stream, fs.createWriteStream(path));
-	}
-
+	console.log("post");
 	const newPost = {
-		posterId: req.body.posterId,
-		message: req.body.message,
-		picture: req.file !== null ? "./uploads/posts/" + fileName : "",
-		video: req.body.video,
-		timestamps: req.body.timestamps,
+		title: req.body.title,
+		content: req.body.content,
+		imageurl: req.file ? "/uploads/posts/" + req.file.fileName : "",
 	};
 
 	try {
-		const sqlRequest = `INSERT INTO posts (id, userId, content, imageURL) VALUES ("${Id}", "${userId}", "${content}", "${imageURL}")`;
+		const sqlRequest = `INSERT INTO posts (id, content, userid, imageURL) VALUES ("${newPost.title}","${newPost.content}", "${req.userId}", "${newPost.imageurl}")`;
 		db.query(sqlRequest, (err, result) => {
 			if (err) {
 				res.status(500).json({ err });
@@ -53,7 +24,7 @@ module.exports.createPost = async (req, res, next) => {
 
 // get all posts
 module.exports.getAllPosts = (req, res, next) => {
-	const sqlRequest = "SELECT * FROM post ORDER BY postId";
+	const sqlRequest = "SELECT * FROM post ORDER BY post_id DESC";
 	db.query(sqlRequest, (err, result) => {
 		if (err) res.status(404).json({ err });
 		res.status(200).json(result);
@@ -62,7 +33,7 @@ module.exports.getAllPosts = (req, res, next) => {
 
 // update post
 module.exports.updatePost = (req, res, next) => {
-	const sqlRequest = `UPDATE post SET post_message = "${req.body.textUpdate}" WHERE postId = ${req.params.id}`;
+	const sqlRequest = `UPDATE post SET post_message = "${req.body.textUpdate}" WHERE post_id = ${req.params.id}`;
 	db.query(sqlRequest, (err, result) => {
 		if (err) {
 			res.status(404).json({ err });
@@ -73,12 +44,12 @@ module.exports.updatePost = (req, res, next) => {
 
 // delete post and all the comments
 module.exports.deletePost = (req, res, next) => {
-	const sqlRequest = `DELETE FROM post WHERE postId = ${req.params.id}`;
+	const sqlRequest = `DELETE FROM post WHERE post_id = ${req.params.id}`;
 	db.query(sqlRequest, (err, result) => {
 		if (err) {
 			res.status(404).json({ err });
 		}
-		const sqlRequest = `DELETE FROM comment WHERE comment_postId = ${req.params.id}`;
+		const sqlRequest = `DELETE FROM comment WHERE comment_post_id = ${req.params.id}`;
 		db.query(sqlRequest, (err, result) => {
 			if (err) {
 				res.status(404).json({ err });
@@ -90,7 +61,7 @@ module.exports.deletePost = (req, res, next) => {
 
 //number of like(s)
 module.exports.numberOfLike = (req, res, next) => {
-	const sqlRequest = `SELECT * FROM heart WHERE postId = ${req.params.id}`;
+	const sqlRequest = `SELECT * FROM heart WHERE post_id = ${req.params.id}`;
 	db.query(sqlRequest, (err, result) => {
 		if (err) {
 			res.status(404).json({ err });
@@ -101,7 +72,7 @@ module.exports.numberOfLike = (req, res, next) => {
 
 //user already like
 module.exports.alreadyLike = (req, res, next) => {
-	const sqlRequest = `SELECT postId, userId FROM heart WHERE userId = ${req.body.userId} AND postId = ${req.params.id}`;
+	const sqlRequest = `SELECT post_id, user_id FROM heart WHERE user_id = ${req.body.userId} AND post_id = ${req.params.id}`;
 	db.query(sqlRequest, (err, result) => {
 		if (err) {
 			res.status(404).json({ err });
@@ -116,13 +87,13 @@ module.exports.alreadyLike = (req, res, next) => {
 
 // like post
 module.exports.likeUnlike = (req, res, next) => {
-	const sqlRequest = `SELECT postId, userId FROM heart WHERE userId = ${req.body.userId} AND postId = ${req.params.id}`;
+	const sqlRequest = `SELECT post_id, user_id FROM heart WHERE user_id = ${req.body.userId} AND post_id = ${req.params.id}`;
 	db.query(sqlRequest, (err, result) => {
 		if (err) {
 			res.status(404).json({ err });
 		}
 		if (result.length === 0) {
-			const sqlRequest = `INSERT INTO heart (userId, postId) VALUES (${req.body.userId}, ${req.params.id})`;
+			const sqlRequest = `INSERT INTO heart (user_id, post_id) VALUES (${req.body.userId}, ${req.params.id})`;
 			db.query(sqlRequest, (err, result) => {
 				if (err) {
 					res.status(404).json({ err });
@@ -131,7 +102,7 @@ module.exports.likeUnlike = (req, res, next) => {
 				res.status(200).json(true);
 			});
 		} else {
-			const sqlRequest = `DELETE FROM heart WHERE userId = ${req.body.userId} AND postId = ${req.params.id}`;
+			const sqlRequest = `DELETE FROM heart WHERE user_id = ${req.body.userId} AND post_id = ${req.params.id}`;
 			db.query(sqlRequest, (err, result) => {
 				if (err) {
 					res.status(404).json(err);

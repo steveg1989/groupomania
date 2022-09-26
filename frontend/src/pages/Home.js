@@ -1,5 +1,5 @@
-import React, { useContext , } from "react";
-import { UserContext, } from "../components/AppContext";
+import React, { useContext } from "react";
+import { UserContext } from "../components/AppContext";
 import Log from "../components/Log";
 import NewPostForm from "../components/Post/NewPostForm";
 import Thread from "../components/Thread";
@@ -9,7 +9,9 @@ const Home = () => {
 
 	return (
 		<div>
-				
+				{!userId ? (
+				<Log />
+			) : (
 				<div className="home">
 					<div className="main">
 						<NewPostForm />
@@ -18,7 +20,7 @@ const Home = () => {
 					
 					
 					</div>
-			
+			)}
 				</div>
 		
 	);
