@@ -14,7 +14,7 @@ const UserInfos = ({ userFirstName, userLastName, userMail, userId }) => {
       withCredentials: true,
     })
       .then(() => {
-        window.location = "/connection";
+        window.location = "/";
       })
       .catch((err) => console.log(err));
   };

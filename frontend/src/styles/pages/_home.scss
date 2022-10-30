@@ -10,3 +10,13 @@
 		transform: translate(-50%, -50%);
 	}
 }
+
+
+.post-home-container {
+		display: flex;
+		width: 95%;
+		max-width: 900px;
+		background-color: transparent;
+		margin: 0.5em auto 0;
+		padding: 2em;
+}

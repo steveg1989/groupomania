@@ -605,6 +605,17 @@ body {
           transform: translate(-50%, -50%);
 }
 
+.post-home-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 95%;
+  max-width: 900px;
+  background-color: transparent;
+  margin: 0.5em auto 0;
+  padding: 2em;
+}
+
 .profile-page h1 {
   text-align: center;
   margin: 1em 0;

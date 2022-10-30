@@ -39,7 +39,7 @@ const AddPost = () => {
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
         data-bs-whatever="@mdo">
-        New post
+        Add New Post
       </button>
 
       <div
