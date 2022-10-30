@@ -1,6 +1,5 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
-import { UserContext } from "../AppContext";
+import { useState } from "react";
 
 const AddPost = () => {
   const [title, setTitle] = useState("");

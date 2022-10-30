@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "../components/AppContext";
 import UpdateProfile from "../components/Profile/UpdateProfile";
 

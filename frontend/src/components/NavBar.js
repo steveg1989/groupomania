@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "./AppContext";
 

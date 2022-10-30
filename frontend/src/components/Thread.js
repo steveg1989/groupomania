@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "./Post/Card";
 import axios from "axios";
 import { isEmpty } from "./Utils";

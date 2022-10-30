@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "../AppContext";
 import AddPost from "./AddPost";
 import UploadImg from "./UploadImg";

@@ -1,11 +1,7 @@
-import React, { useContext } from "react";
-import { UserContext } from "../components/AppContext";
 import NewPostForm from "../components/Post/NewPostForm";
 import Thread from "../components/Thread";
 
 const Home = () => {
-  const userId = useContext(UserContext).dataProfile.userId;
-
   return (
     <div>
       <div className="home">

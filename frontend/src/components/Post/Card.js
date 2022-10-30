@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DeletePost from "./DeletePost";
 import LikeButton from "./LikeButton";
 import CardComments from "./CardComments";
