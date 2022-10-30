@@ -96,10 +96,12 @@ const SignUpForm = () => {
         <form action="" onSubmit={handleRegister} id="sign-up-form">
           <label htmlFor="firstname">First name</label>
           <br />
-          <input
+          <input 
+          className="p-4"
             type="text"
             name="firstname"
             id="firstname"
+            placeholder="Your first name"
             onChange={(e) => setfirstname(e.target.value)}
             value={firstname}
           />
@@ -108,10 +110,12 @@ const SignUpForm = () => {
 
           <label htmlFor="lastname">Last name</label>
           <br />
-          <input
+          <input 
+          className="p-4"
             type="text"
             name="lastname"
             id="lastname"
+            placeholder="Your last name"
             onChange={(e) => setlastname(e.target.value)}
             value={lastname}
           />
@@ -120,9 +124,11 @@ const SignUpForm = () => {
 
           <label htmlFor="mail">E-mail address</label>
           <br />
-          <input
+          <input 
+          className="p-4"
             type="text"
             name="mail"
+            placeholder="Your email address"
             id="mail"
             onChange={(e) => setmail(e.target.value)}
             value={mail}
@@ -132,10 +138,12 @@ const SignUpForm = () => {
 
           <label htmlFor="password">Password</label>
           <br />
-          <input
+          <input 
+          className="p-4"
             type="password"
             name="password"
             id="password"
+            placeholder="Your Password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
@@ -144,10 +152,12 @@ const SignUpForm = () => {
 
           <label htmlFor="password-conf">Confirm password</label>
           <br />
-          <input
+          <input 
+          className="p-4"
             type="password"
             name="password"
             id="password-conf"
+            placeholder="Confirm your Password"
             onChange={(e) => setControlPassword(e.target.value)}
             value={controlPassword}
           />
@@ -155,7 +165,7 @@ const SignUpForm = () => {
           <br />
           <br />
 
-          <input type="submit" value="Validate registration"></input>
+          <input  type="submit" value="Validate registration"></input>
         </form>
       )}
     </>

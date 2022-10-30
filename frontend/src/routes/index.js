@@ -36,7 +36,7 @@ function AllRoutes() {
             dataUserContext.updateUserdata(dataProfile);
             navigate("/profile");
           } else {
-            navigate("/connection");
+            navigate("/");
           }
         })
         .catch((err) => console.log(err));
@@ -48,8 +48,8 @@ function AllRoutes() {
     <div className="app">
       <NavBar />
       <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/connection" exact element={<Connection />} />
+        <Route path="/" exact element={<Connection />} />
+        <Route path="/home" exact element={<Home />} />
         <Route path="/profile" exact element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

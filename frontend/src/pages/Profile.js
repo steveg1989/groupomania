@@ -5,7 +5,7 @@ import UpdateProfile from "../components/Profile/UpdateProfile";
 const Profile = () => {
   const userId = useContext(UserContext).dataProfile.userId;
   if (!userId) {
-    window.location = "/connection";
+    window.location = "/";
   }
 
   return (

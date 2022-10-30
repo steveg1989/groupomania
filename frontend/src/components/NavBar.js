@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "./AppContext";
-import axios from "axios";
 
 const NavBar = () => {
   const dataUser = useContext(UserContext);
@@ -10,18 +9,14 @@ const NavBar = () => {
   return (
     <div className="nav-container">
       <ul></ul>
-      <NavLink to="/">
-        <img
-          className="logo"
-          src="./assets/logos/icon-left-font-monochrome-black.png"
-          alt="logo"
-        />
-      </NavLink>
+      <img
+        className="logo"
+        src="./assets/logos/icon-left-font-monochrome-black.png"
+        alt="logo"
+      />
       {dataUser.dataProfile.userId ? (
-        <ul>
-          <li></li>
-          <li className="welcome">
-            <NavLink to="/profile">
+        <div>
+          <div className="d-flex align-items-center flex-row ">
               {dataUser.dataProfile.img_profile ? (
                 <img
                   className="profile-pic"
@@ -38,11 +33,10 @@ const NavBar = () => {
                 />
               )}
               <h5>{dataUser.dataProfile.firstname}</h5>
-            </NavLink>
-          </li>
-        </ul>
+          </div>
+        </div>
       ) : (
-        <ul></ul>
+        <div></div>
       )}
     </div>
   );

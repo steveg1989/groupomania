@@ -56,13 +56,15 @@ const SignInForm = () => {
   return (
     <div>
       <form action="" onSubmit={handleLogin} id="sign-up-form">
-        <label htmlFor="email">eemail</label>
+        <label htmlFor="email">Email</label>
         <br />
         <input
           type="text"
           name="email"
           id="email"
           value={email}
+          placeholder="Your email address"
+          className="p-4"
           onChange={(e) => setEmail(e.target.value)}
         />
         <br />
@@ -73,13 +75,15 @@ const SignInForm = () => {
         <input
           type="password"
           name="password"
+          placeholder="Your Password"
+          className="p-4"
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="error"></div>
         <br />
-        <input type="submit" value="To log in" />
+        <input type="submit" value="Log in" />
       </form>
     </div>
   );

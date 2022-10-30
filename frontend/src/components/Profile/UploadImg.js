@@ -58,7 +58,7 @@ const UploadImg = () => {
         />
         <br />
         <input
-          className="change-pic"
+          className="submit-btn"
           type="submit"
           value="Change profile picture"
         />

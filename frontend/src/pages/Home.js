@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { UserContext } from "../components/AppContext";
-import Log from "../components/Log";
 import NewPostForm from "../components/Post/NewPostForm";
 import Thread from "../components/Thread";
 

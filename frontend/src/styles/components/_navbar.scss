@@ -8,21 +8,21 @@
 		width: 250px;
 		object-fit: contain;
 	}
-	ul {
-		display: flex;
-		justify-content: flex-end;
-		width: 250px;
-	}
 	.profile-pic {
 		border-radius: 100%;
 		width: 42px;
 		height: 42px;
 		border: solid 1px $color-tertiary;
-		margin-right: 1em;
+		margin-right: 4px;
 	}
 	.logout {
 		width: 32px;
 		height: 32px;
 		cursor: pointer;
+	}
+
+	h5{
+		color:black;
+		font-size:1rem;
 	}
 }
