@@ -6,6 +6,7 @@ import DisplayPosts from "../components/Post/DisplayPosts";
 
 const Profile = () => {
   const userId = useContext(UserContext).dataProfile.userId;
+
   if (!userId) {
     window.location = "/";
   }

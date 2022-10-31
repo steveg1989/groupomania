@@ -6,12 +6,13 @@ module.exports.createPost = async (req, res, next) => {
     title: req.body.title,
     content: req.body.content,
     username: req.body.username,
+    userId:req.userId,
     imageurl: req.file ? "/uploads/posts/" + req.file.filename : "",
   };
   console.log("postsss:", req.body);
 
   try {
-    const sqlRequest = `INSERT INTO posts (title, content, username, imageurl ) VALUES ("${newPost.title}","${newPost.content}", "${newPost.username}", "${newPost.imageurl}")`;
+    const sqlRequest = `INSERT INTO posts (title, content, username, userId, imageurl ) VALUES ("${newPost.title}","${newPost.content}", "${newPost.username}", "${newPost.userId}", "${newPost.imageurl}")`;
     db.query(sqlRequest, (err, result) => {
       if (err) {
         res.status(400).json({ err });
@@ -26,6 +27,16 @@ module.exports.createPost = async (req, res, next) => {
 // get all posts
 module.exports.getAllPosts = (req, res, next) => {
   const sqlRequest = "SELECT * FROM posts";
+  console.log("get all man !");
+  db.query(sqlRequest, (err, result) => {
+    if (err) res.status(404).json({ err });
+    console.log(result)
+    res.status(200).json(result);
+  });
+};
+// get single post
+module.exports.getSiglePost = (req, res, next) => {
+  const sqlRequest = `SELECT * FROM posts WHERE id = ${req.params.id}`;
   console.log("get all man !");
   db.query(sqlRequest, (err, result) => {
     if (err) res.status(404).json({ err });

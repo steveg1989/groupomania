@@ -12,7 +12,6 @@ module.exports.userInfo = (req, res, next) => {
     if (err) {
       res.status(404).json({ err });
     }
-
     // response data
     const user = {
       email: result[0].email,
