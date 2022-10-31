@@ -38,7 +38,20 @@ const Connection = () => {
     fetchToken();
   }, []);
 
-  return <Log />;
+  return (
+    <>
+      <nav className="nav-container">
+        <ul></ul>
+        <img
+          className="logo"
+          src="./assets/logos/icon-left-font-monochrome-black.png"
+          alt="logo"
+        />
+        <ul></ul>
+      </nav>
+      <Log />;
+    </>
+  );
 };
 
 export default Connection;
