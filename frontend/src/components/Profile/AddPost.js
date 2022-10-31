@@ -1,16 +1,23 @@
 import axios from "axios";
 import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../AppContext";
 
 const AddPost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
+  const dataUser = useContext(UserContext);
+
+  const usename =
+    dataUser.dataProfile.firstname +" "+ dataUser.dataProfile.lastname;
 
   const handlePost = async () => {
     const datas = new FormData();
     datas.append("title", title);
     datas.append("content", content);
     datas.append("image_post", image);
+    datas.append("username", usename);
 
     axios({
       method: "post",
@@ -23,8 +30,8 @@ const AddPost = () => {
           console.log(res.data.error);
         } else {
           // get data
-          console.log(res.data);
-          // window.location.reload();
+          //console.log(res.data);
+          window.location.reload();
         }
       })
       .catch((err) => {
@@ -45,7 +52,7 @@ const AddPost = () => {
       <div
         className="modal fade"
         id="exampleModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div className="modal-dialog">
@@ -63,7 +70,7 @@ const AddPost = () => {
             <div className="modal-body">
               <form>
                 <div className="mb-3">
-                  <label for="recipient-name" className="col-form-label">
+                  <label htmlFor="recipient-name" className="col-form-label">
                     Title:
                   </label>
                   <input
@@ -76,7 +83,7 @@ const AddPost = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label for="message-text" className="col-form-label">
+                  <label htmlFor="message-text" className="col-form-label">
                     Content:
                   </label>
                   <textarea
@@ -87,7 +94,7 @@ const AddPost = () => {
                     }}></textarea>
                 </div>
                 <div className="mb-3">
-                  <label for="message-text" className="col-form-label">
+                  <label htmlFor="message-text" className="col-form-label">
                     Image:
                   </label>
                   <input

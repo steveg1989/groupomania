@@ -2,15 +2,16 @@ const db = require("../config/db").getDB();
 
 // create post
 module.exports.createPost = async (req, res, next) => {
-  console.log("post");
   const newPost = {
     title: req.body.title,
     content: req.body.content,
+    username: req.body.username,
     imageurl: req.file ? "/uploads/posts/" + req.file.filename : "",
   };
+  console.log("postsss:", req.body);
 
   try {
-    const sqlRequest = `INSERT INTO posts (title, content, userid, imageurl ) VALUES ("${newPost.title}","${newPost.content}", "${req.userId}", "${newPost.imageurl}")`;
+    const sqlRequest = `INSERT INTO posts (title, content, username, imageurl ) VALUES ("${newPost.title}","${newPost.content}", "${newPost.username}", "${newPost.imageurl}")`;
     db.query(sqlRequest, (err, result) => {
       if (err) {
         res.status(400).json({ err });
@@ -24,9 +25,11 @@ module.exports.createPost = async (req, res, next) => {
 
 // get all posts
 module.exports.getAllPosts = (req, res, next) => {
-  const sqlRequest = "SELECT * FROM post ORDER BY post_id DESC";
+  const sqlRequest = "SELECT * FROM posts";
+  console.log("get all man !");
   db.query(sqlRequest, (err, result) => {
     if (err) res.status(404).json({ err });
+    console.log(result)
     res.status(200).json(result);
   });
 };

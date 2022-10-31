@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import DeletePost from "./DeletePost";
 import LikeButton from "./LikeButton";
-import CardComments from "./CardComments";
+//import CardComments from "./CardComments";
 import { UserContext } from "../AppContext";
 import axios from "axios";
 
@@ -142,7 +142,7 @@ const Card = ({ post }) => {
 						<img onClick={() => setShowComments(!showComments)} src="./assets/pictos/comment.svg" alt="comment" />
 					</div>
 				</div>
-				{showComments && <CardComments post={post} />}
+				{/**showComments && <CardComments post={post} />*/}
 			</li>
 		</div>
 	);

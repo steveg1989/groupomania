@@ -2,10 +2,10 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../components/AppContext";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
-import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
 import Connection from "../pages/Connection";
+import PostDetail from "../pages/PostDetail";
 import NavBar from "../components/NavBar";
 import axios from "axios";
 
@@ -49,8 +49,8 @@ function AllRoutes() {
       <NavBar />
       <Routes>
         <Route path="/" exact element={<Connection />} />
-        <Route path="/home" exact element={<Home />} />
         <Route path="/profile" exact element={<Profile />} />
+        <Route path="/postdetail" exact element={<PostDetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
