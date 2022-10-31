@@ -609,8 +609,16 @@ body {
   width: 95%;
   max-width: 900px;
   background-color: transparent;
-  margin: 1em auto 0;
-  padding: 2em;
+  margin: 0 auto 0 auto;
+  padding: 1rem;
+}
+
+.post-comment-container {
+  width: 95%;
+  max-width: 900px;
+  background-color: transparent;
+  margin: 0 auto 0 auto;
+  padding: 1rem;
 }
 
 .profile-page h1 {

@@ -26,7 +26,7 @@ module.exports.createPost = async (req, res, next) => {
 
 // get all posts
 module.exports.getAllPosts = (req, res, next) => {
-  const sqlRequest = "SELECT * FROM posts";
+  const sqlRequest = "SELECT * FROM posts ORDER BY id DESC";
   console.log("get all man !");
   db.query(sqlRequest, (err, result) => {
     if (err) res.status(404).json({ err });
@@ -37,7 +37,6 @@ module.exports.getAllPosts = (req, res, next) => {
 // get single post
 module.exports.getSiglePost = (req, res, next) => {
   const sqlRequest = `SELECT * FROM posts WHERE id = ${req.params.id}`;
-  console.log("get all man !");
   db.query(sqlRequest, (err, result) => {
     if (err) res.status(404).json({ err });
     console.log(result)
@@ -58,20 +57,16 @@ module.exports.updatePost = (req, res, next) => {
 
 // delete post and all the comments
 module.exports.deletePost = (req, res, next) => {
-  const sqlRequest = `DELETE FROM post WHERE post_id = ${req.params.id}`;
-  db.query(sqlRequest, (err, result) => {
-    if (err) {
-      res.status(404).json({ err });
-    }
-    const sqlRequest = `DELETE FROM comment WHERE comment_post_id = ${req.params.id}`;
+  const sqlRequest = `DELETE FROM posts WHERE id = ${req.params.id}`;
+  
     db.query(sqlRequest, (err, result) => {
       if (err) {
         res.status(404).json({ err });
       }
       res.status(200).json(result);
     });
-  });
-};
+  }
+
 
 //number of like(s)
 module.exports.numberOfLike = (req, res, next) => {

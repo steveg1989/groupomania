@@ -26,7 +26,7 @@ const Connection = () => {
               lastname: data.lastname,
               message: data.message,
               userId: data.userId,
-              img_profile: data.img_profile,
+              imageurl: data.imageurl,
             };
             dataUserContext.updateUserdata(dataProfile);
             navigate("/profile");

@@ -63,7 +63,7 @@ module.exports.signIn = async (req, res) => {
           userId: result[0].userId,
           firstname: result[0].firstname,
           lastname: result[0].lastname,
-          img_profile: result[0].imageurl,
+          imageurl: result[0].imageurl,
         });
       } else {
         res.status(200).json({

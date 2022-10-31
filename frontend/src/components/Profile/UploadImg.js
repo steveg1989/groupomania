@@ -30,12 +30,10 @@ const UploadImg = () => {
   return (
     <div className="profile-picture">
       <div className="profile-img">
-        {dataUserContext.dataProfile.img_profile ? (
+        {dataUserContext.dataProfile.imageurl ? (
           <img
             className="profile-pic"
-            src={
-              "http://localhost:3001" + dataUserContext.dataProfile.img_profile
-            }
+            src={"http://localhost:3001" + dataUserContext.dataProfile.imageurl}
             alt="profile-pic"
           />
         ) : (
