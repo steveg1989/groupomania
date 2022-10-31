@@ -46,7 +46,6 @@ const UpdateProfile = () => {
           src="./assets/logos/icon-left-font-monochrome-black.png"
           alt="logo"
         />
-        {dataUser.dataProfile.imageurl ? (
           <div>
             <div className="d-flex align-items-center flex ">
               {dataUser.dataProfile.imageurl ? (
@@ -65,9 +64,6 @@ const UpdateProfile = () => {
               <h5>{dataUser.dataProfile.firstname}</h5>
             </div>
           </div>
-        ) : (
-          <div></div>
-        )}
         <ul></ul>
       </nav>
 
