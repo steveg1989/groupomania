@@ -6,6 +6,7 @@ import { UserContext } from "../AppContext";
 const UserInfos = () => {
   // logout and delete account
   const dataUserContext = useContext(UserContext);
+  
   const deleteAccount = () => {
     axios({
       method: "patch",

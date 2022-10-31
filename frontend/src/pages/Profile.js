@@ -26,7 +26,7 @@ const Profile = () => {
           if (res.status === 200) {
             // get user data
             const data = res.data;
-
+            
             const dataProfile = {
               email: data.email,
               firstname: data.firstname,

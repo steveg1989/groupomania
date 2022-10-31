@@ -5,13 +5,13 @@ const { uploadPost } = require("../middlewares/muter-upload");
 
 // posts
 router.post(
-  "/",
+  "/", 
   checkUser,
   uploadPost.single("image_post"),
   postController.createPost
 );
 router.get("/", checkUser, postController.getAllPosts);
-router.get("/:id", checkUser, postController.getSiglePost);
+router.get("/:id", checkUser, postController.getSinglePost);
 router.post("/:id", checkUser, postController.updatePost);
 router.delete("/:id", checkUser, postController.deletePost);
 

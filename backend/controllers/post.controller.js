@@ -35,11 +35,11 @@ module.exports.getAllPosts = (req, res, next) => {
   });
 };
 // get single post
-module.exports.getSiglePost = (req, res, next) => {
+module.exports.getSinglePost = (req, res, next) => {
   const sqlRequest = `SELECT * FROM posts WHERE id = ${req.params.id}`;
   db.query(sqlRequest, (err, result) => {
     if (err) res.status(404).json({ err });
-    console.log(result)
+    console.log(result);
     res.status(200).json(result);
   });
 };

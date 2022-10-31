@@ -17,7 +17,7 @@ export default function DisplayPosts() {
           // get user data
           setPosts(res.data);
         })
-        .catch((err) => console.log("Error man : ", err));
+        .catch((err) => console.log("Error: ", err));
     };
 
     getPosts();

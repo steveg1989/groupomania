@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom";
 export default function DisplayPostDetails() {
   const [postDetails, setPostDetails] = useState([]);
   const navigate = useNavigate();
+
   const query = new URLSearchParams(useLocation().search);
   const id = query.get("id");
+
   const userId = useContext(UserContext).dataProfile.userId;
 
   if (!userId) {
