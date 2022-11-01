@@ -15,10 +15,6 @@ export default function DisplayPostDetails() {
 
   const userId = useContext(UserContext).dataProfile.userId;
 
-  if (!userId) {
-    navigate("/");
-  }
-
   // delete post
   const deletPost = async () => {
     await axios({
