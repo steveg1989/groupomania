@@ -4,6 +4,7 @@ import { useLocation, Link } from "react-router-dom";
 import UpdateProfile from "../components/Profile/UpdateProfile";
 import { UserContext } from "../components/AppContext";
 import { useNavigate } from "react-router-dom";
+import EditPost from "../components/Post/EditPost";
 
 export default function DisplayPostDetails() {
   const [postDetails, setPostDetails] = useState([]);
@@ -72,9 +73,13 @@ export default function DisplayPostDetails() {
                       key={postDetails.id}>
                       <div>
                         <div className="d-flex justify-content-start align-items-center">
-                          <p className="fs-6 fw-bold px-2 pt-3 text-primary">
-                            {postDetails.username}
-                          </p>
+                          {postDetails.userId === userId ? (
+                            <p className="fs-6 fw-bold text-primary">You</p>
+                          ) : (
+                            <p className="fs-6 fw-bold text-primary">
+                              {postDetails.username}
+                            </p>
+                          )}
                         </div>
                         <div className="d-flex">
                           <div className="media-body">
@@ -99,7 +104,12 @@ export default function DisplayPostDetails() {
                               style={{ cursor: "pointer" }}
                               className="text-primary text-decoration-underline">
                               {" "}
-                              Edit
+                              <EditPost
+                                posTitle={postDetails.title}
+                                postContent={postDetails.content}
+                                PostImage={postDetails.imageurl}
+                                postId={postDetails.id}
+                              />
                             </div>
                           ) : (
                             ""

@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../AppContext";
 
 export default function DisplayPosts() {
   const [posts, setPosts] = useState([]);
+  const userId = useContext(UserContext).dataProfile.userId;
 
   // get all posts
   useEffect(() => {
@@ -37,9 +40,13 @@ export default function DisplayPosts() {
               className="text-decoration-none">
               <div className="d-flex justify-content-start align-items-center">
                 Post by:
-                <p className="fs-6 fw-bold px-2 pt-3 text-primary">
-                  {post.username}
-                </p>
+                {post.userId === userId ? (
+                  <p className="fs-6 fw-bold px-2 pt-3 text-primary">You</p>
+                ) : (
+                  <p className="fs-6 fw-bold px-2 pt-3 text-primary">
+                    {post.username}
+                  </p>
+                )}
               </div>
               <div className="d-flex">
                 <div className="media-body">

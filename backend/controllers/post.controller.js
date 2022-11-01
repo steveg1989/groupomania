@@ -6,7 +6,7 @@ module.exports.createPost = async (req, res, next) => {
     title: req.body.title,
     content: req.body.content,
     username: req.body.username,
-    userId:req.userId,
+    userId: req.userId,
     imageurl: req.file ? "/uploads/posts/" + req.file.filename : "",
   };
   console.log("postsss:", req.body);
@@ -30,7 +30,7 @@ module.exports.getAllPosts = (req, res, next) => {
   console.log("get all man !");
   db.query(sqlRequest, (err, result) => {
     if (err) res.status(404).json({ err });
-    console.log(result)
+    console.log(result);
     res.status(200).json(result);
   });
 };
@@ -46,7 +46,14 @@ module.exports.getSinglePost = (req, res, next) => {
 
 // update post
 module.exports.updatePost = (req, res, next) => {
-  const sqlRequest = `UPDATE post SET post_message = "${req.body.textUpdate}" WHERE post_id = ${req.params.id}`;
+  let sqlRequest = "";
+
+  if (req.file) {
+    sqlRequest = `UPDATE posts SET title = "${req.body.title}", content = "${req.body.content}", imageurl="/uploads/posts/${req.file.filename}" WHERE id = ${req.params.id}`;
+  } else {
+    sqlRequest = `UPDATE posts SET title = "${req.body.title}", content = "${req.body.content}", imageurl="${req.body.image_post}" WHERE id = ${req.params.id}`;
+  }
+
   db.query(sqlRequest, (err, result) => {
     if (err) {
       res.status(404).json({ err });
@@ -58,17 +65,14 @@ module.exports.updatePost = (req, res, next) => {
 // delete post and all the comments
 module.exports.deletePost = (req, res, next) => {
   const sqlRequest = `DELETE FROM posts WHERE id = ${req.params.id}`;
-  
-    db.query(sqlRequest, (err, result) => {
-      if (err) {
-        res.status(404).json({ err });
-      }
-      res.status(200).json(result);
-    });
-  }
 
+  db.query(sqlRequest, (err, result) => {
+    if (err) {
+      res.status(404).json({ err });
+    }
+    res.status(200).json(result);
+  });
+};
 
 // like post
-module.exports.makeAsRead = (req, res, next) => {
-  
-};
+module.exports.makeAsRead = (req, res, next) => {};

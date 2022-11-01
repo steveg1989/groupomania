@@ -10,9 +10,11 @@ router.post(
   uploadPost.single("image_post"),
   postController.createPost
 );
+
+router.put("/:id", checkUser,uploadPost.single("image_post"), postController.updatePost);
+
 router.get("/", checkUser, postController.getAllPosts);
 router.get("/:id", checkUser, postController.getSinglePost);
-router.post("/:id", checkUser, postController.updatePost);
 router.delete("/:id", checkUser, postController.deletePost);
 
 // likes
