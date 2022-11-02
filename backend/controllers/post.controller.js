@@ -33,6 +33,7 @@ module.exports.getAllPosts = (req, res, next) => {
     res.status(200).json(result);
   });
 };
+
 // get single post
 module.exports.getSinglePost = (req, res, next) => {
   const sqlRequest = `SELECT * FROM posts WHERE id = ${req.params.id}`;

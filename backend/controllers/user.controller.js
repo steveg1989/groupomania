@@ -1,6 +1,6 @@
 const db = require("../config/db").getDB();
 
-// user info
+// user info as connected using jwt
 module.exports.userInfo = (req, res, next) => {
   const userId = req.userId;
   const sqlRequest = `SELECT userId, firstname, imageurl, lastname, email FROM users WHERE userId = ${userId};`;
@@ -21,7 +21,7 @@ module.exports.userInfo = (req, res, next) => {
   });
 };
 
-// update img
+// update img profile
 module.exports.updateImgProfile = async (req, res) => {
   console.log(req.userId);
   console.log("after upload image", req.file);
