@@ -5,6 +5,8 @@ import UpdateProfile from "../components/Profile/UpdateProfile";
 import { UserContext } from "../components/AppContext";
 import { useNavigate } from "react-router-dom";
 import EditPost from "../components/Post/EditPost";
+import AddComment from "../components/Post/AddComment";
+import DisplayComments from "../components/Post/DisplayComments";
 
 export default function DisplayPostDetails() {
   const [postDetails, setPostDetails] = useState([]);
@@ -27,7 +29,7 @@ export default function DisplayPostDetails() {
       withCredentials: true,
     })
       .then((res) => {
-        if (res.status === 200) window.location = "/profile";
+        if (res.status === 200) navigate("/profile");
       })
       .catch((err) => console.log(err));
   };
@@ -129,19 +131,16 @@ export default function DisplayPostDetails() {
                       </div>
                     </div>
                     <div className="post-comment-block">
-                      <div>
-                        <textarea className="w-100 p-4 rounded-3"></textarea>
-                        <div className="d-flex justify-content-end">
-                          <button className="px-3 py-2 float-en rounded-3 bg-primary text-white">
-                            Add comment
-                          </button>
-                        </div>
-                      </div>
-                      <div>Comments will display her!</div>
+                      <AddComment postId={postDetails.id} />
                     </div>
                   </>
                 );
               })}
+              <div className="comments-block">
+
+                  <DisplayComments postId={id} />
+                
+              </div>
             </>
           </div>
         </div>

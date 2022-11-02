@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-const AddPost = ({postId, posTitle, postContent, PostImage}) => {
+const EditPost = ({postId, posTitle, postContent, PostImage}) => {
   const [title, setTitle] = useState(posTitle);
   const [content, setContent] = useState(postContent);
   const [image, setImage] = useState(PostImage);
@@ -115,4 +115,4 @@ const AddPost = ({postId, posTitle, postContent, PostImage}) => {
   );
 };
 
-export default AddPost;
+export default EditPost;

@@ -30,7 +30,6 @@ module.exports.getAllPosts = (req, res, next) => {
   console.log("get all man !");
   db.query(sqlRequest, (err, result) => {
     if (err) res.status(404).json({ err });
-    console.log(result);
     res.status(200).json(result);
   });
 };
@@ -39,7 +38,6 @@ module.exports.getSinglePost = (req, res, next) => {
   const sqlRequest = `SELECT * FROM posts WHERE id = ${req.params.id}`;
   db.query(sqlRequest, (err, result) => {
     if (err) res.status(404).json({ err });
-    console.log(result);
     res.status(200).json(result);
   });
 };
