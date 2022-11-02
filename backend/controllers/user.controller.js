@@ -1,7 +1,4 @@
 const db = require("../config/db").getDB();
-const fs = require("fs");
-const { promisify } = require("util");
-const pipeline = promisify(require("stream").pipeline);
 
 // user info
 module.exports.userInfo = (req, res, next) => {
@@ -12,14 +9,13 @@ module.exports.userInfo = (req, res, next) => {
 		if (err) {
 			res.status(404).json({ err });
 		}
-		
 		// response data
 		const user = {
 			email: result[0].email,
 			userId: result[0].userId,
 			firstname: result[0].firstname,
 			lastname: result[0].lastname,
-			img_profile: result[0].imageurl,
+			imageurl: result[0].imageurl,
 		};
 			res.status(200).json(user);
 	});

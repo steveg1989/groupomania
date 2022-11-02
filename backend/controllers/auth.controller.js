@@ -17,17 +17,20 @@ module.exports.signUp = async (req, res) => {
 			password: hash,
 		};
     console.log(user);
-		const sqlRequest = `INSERT INTO users (firstname, lastname, email, password) VALUES ('${user.firstname}', '${user.lastname}', '${user.email}', '${user.password}')`;
+		const sqlRequest = `INSERT INTO users (firstname, lastname, email, password) VALUES ('${user.firstname}', '${user.lastname}', '${user.mail}', '${user.password}')`;
 		db.query(sqlRequest, (err, result) => {
 			if (err) {
 				const errors = Errors(err);
 				res.status(400).json({ errors });
 				return;
 			} else {
-				res.status(201).json({ message: "user created, welcome " + user.firstname });
+				res
+          .status(201)
+          .json({ message: "user created, welcome " + user.firstname });
 			}
 		});
 	} catch (err) {
+    console.log(err);
 		res.status(400).json({ message: "register failed", err });
 	}
 };
@@ -53,20 +56,17 @@ module.exports.signIn = async (req, res) => {
         const token = jwt.sign(
           { userId },
           "hi",
-
           {
             expiresIn: maxAge,
           });
 
           res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge });
           res.status(200).json({
-            message: "logged",
-            token: token,
             email: result[0].email,
             userId: result[0].userId,
             firstname: result[0].firstname,
             lastname: result[0].lastname,
-            img_profile: result[0].imageurl,
+            imageurl: result[0].imageurl,
           });
         } else {
           res.status(200).json({

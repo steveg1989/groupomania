@@ -11,6 +11,7 @@ router.get("/logout", authController.logout);
 router.patch("/delete-account/:id", checkUser, authController.deleteAccount);
 // user
 router.get("/get-info", checkUser, userController.userInfo);
+
 router.post(
   "/upload",
   checkUser,

@@ -1,41 +1,39 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../AppContext";
 
 const UploadImg = () => {
-	const [file, setFile] = useState();
-	const dataUserContext = useContext(UserContext);
+  const [file, setFile] = useState();
+  const dataUserContext = useContext(UserContext);
 
-	// change pic
-	const handlePicture = (e) => {
-		const formData = new FormData();
-		formData.append("profile_image", file);
+  // change pic
+  const handlePicture = (e) => {
+    const formData = new FormData();
+    formData.append("profile_image", file);
 
-		axios({
-			method: "post",
-			baseURL: `http://localhost:3001/api/user/upload`,
-			withCredentials: true,
-			data: formData,
-		})
-			.then((res) => {
-				if (res.err) {
-					console.log(res.err);
-				}
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	};
+    axios({
+      method: "post",
+      baseURL: `${process.env.REACT_APP_API_URL}api/user/upload`,
+      withCredentials: true,
+      data: formData,
+    })
+      .then((res) => {
+        if (res.err) {
+          console.log(res.err);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-	return (
-		<div className="profile-picture">
-			<div className="profile-img">
-			{dataUserContext.dataProfile.img_profile ? (
+  return (
+    <div className="profile-picture">
+      <div className="profile-img">
+        {dataUserContext.dataProfile.imageurl ? (
           <img
             className="profile-pic"
-            src={
-              "http://localhost:3001" + dataUserContext.dataProfile.img_profile
-            }
+            src={"http://localhost:3001" + dataUserContext.dataProfile.imageurl}
             alt="profile-pic"
           />
         ) : (
@@ -58,13 +56,13 @@ const UploadImg = () => {
         />
         <br />
         <input
-          className="change-pic"
+          className="submit-btn"
           type="submit"
           value="Change profile picture"
         />
-				</form>
-		</div>
-	);
+      </form>
+    </div>
+  );
 };
 
 export default UploadImg;

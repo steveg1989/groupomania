@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 
 const Log = () => {
-	const [signUpModal, setSignUpModal] = useState(true);
-	const [signInModal, setSignInModal] = useState(false);
+	const [signUpModal, setSignUpModal] = useState(false);
+	const [signInModal, setSignInModal] = useState(true);
 
 	const handleModals = (e) => {
 		if (e.target.id === "register") {
@@ -21,11 +21,17 @@ const Log = () => {
 		<div className="connection-form">
 			<div className="form-container">
 				<ul>
-					<li onClick={handleModals} id="register" className={signUpModal ? "active" : null}>
-						Register
+					<li 
+						onClick={handleModals} 
+						id="login" 
+						className={signUpModal ? "active" : null}>
+						Log in
 					</li>
-					<li onClick={handleModals} id="login" className={signInModal ? "active" : null}>
-            To log in
+					<li 
+						onClick={handleModals} 
+						id="register" 
+						className={signInModal ? "active" : null}>
+            Register
 					</li>
 				</ul>
 				{signUpModal && <SignUpForm />}

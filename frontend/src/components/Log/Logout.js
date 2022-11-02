@@ -10,16 +10,16 @@ const Logout = () => {
 		})
 			.then((res) => {
 			if (res.status === 200) {
-		window.location = "/connection";
+		window.location = "/";
 	  	}
 		})
 		.catch((err) => console.log(err));
   };
 
 	return (
-		<li onClick={logout} className= "logout-btn">
-      <p>Sign out</p>
-		</li>
+		<div onClick={logout}>
+      <input className="submit-btn" type="submit" value="Sign out" />
+    </div>
 	);
 };
 
