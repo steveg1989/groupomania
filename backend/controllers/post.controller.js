@@ -25,12 +25,24 @@ module.exports.createPost = async (req, res, next) => {
 };
 
 // get all posts
-module.exports.getAllPosts = (req, res, next) => {
+module.exports.getAllPosts = async (req, res, next) => {
   const sqlRequest = "SELECT * FROM posts ORDER BY id DESC";
-  console.log("get all man !");
-  db.query(sqlRequest, (err, result) => {
+  await db.query(sqlRequest, async (err, result) => {
     if (err) res.status(404).json({ err });
-    res.status(200).json(result);
+
+    let posts = result;
+    var postsViewed;
+
+    const sqlPostViewedRequest = `SELECT * FROM postsviewed`;
+
+    await db.query(sqlPostViewedRequest, (err, result) => {
+      if (err) {
+        res.status(404).json({ err });
+      }
+      postsViewed = result;
+      console.log(posts, postsViewed);
+      res.status(200).json({ posts: posts, postsViewed: postsViewed });
+    });
   });
 };
 
@@ -45,9 +57,10 @@ module.exports.getSinglePost = (req, res, next) => {
 
 // update post
 module.exports.updatePost = (req, res, next) => {
+  
   let sqlRequest = "";
 
-  if (req.file) {
+  if (req.file) { 
     sqlRequest = `UPDATE posts SET title = "${req.body.title}", content = "${req.body.content}", imageurl="/uploads/posts/${req.file.filename}" WHERE id = ${req.params.id}`;
   } else {
     sqlRequest = `UPDATE posts SET title = "${req.body.title}", content = "${req.body.content}", imageurl="${req.body.image_post}" WHERE id = ${req.params.id}`;
@@ -63,7 +76,7 @@ module.exports.updatePost = (req, res, next) => {
 
 // delete post and all the comments
 module.exports.deletePost = (req, res, next) => {
-  const sqlRequest = `DELETE FROM posts WHERE id = ${req.params.id}`;
+  const sqlRequest = `DELETE FROM posts id = ${req.params.id}`;
 
   db.query(sqlRequest, (err, result) => {
     if (err) {
@@ -73,5 +86,16 @@ module.exports.deletePost = (req, res, next) => {
   });
 };
 
-// like post
-module.exports.makeAsRead = (req, res, next) => {};
+
+// make post as read
+module.exports.makePostAsRead = (req, res, next) => {
+
+const sqlRequest = `INSERT INTO postsviewed (userId, postId ) VALUES ("${req.userId}", "${req.params.id}")`;
+
+  db.query(sqlRequest, (err, result) => {
+    if (err) {
+      res.status(404).json({ err });
+    }
+    res.status(200).json(result);
+  });
+};

@@ -14,7 +14,7 @@ const AddComent = ({ postId }) => {
     const data = {
       comment: comment,
       username: usename,
-    };
+    }; 
 
     axios({
       method: "post",

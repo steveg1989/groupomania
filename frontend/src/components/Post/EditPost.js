@@ -6,13 +6,13 @@ const EditPost = ({postId, posTitle, postContent, PostImage}) => {
   const [content, setContent] = useState(postContent);
   const [image, setImage] = useState(PostImage);
 
-  const handlePost = async () => {
+  const handleUpdatePost = async () => {
     const data = new FormData();
     data.append("title", title);
     data.append("content", content);
     data.append("image_post", image);
 
-    axios({
+    axios({ 
       method: "put",
       url: `http://localhost:3001/api/post/${postId}`,
       withCredentials: true,
@@ -95,6 +95,7 @@ const EditPost = ({postId, posTitle, postContent, PostImage}) => {
                     type="file"
                     onChange={(event) => {
                       setImage(event.target.files[0]);
+                      console.log("imageeee", event.target.files[0]);
                     }}
                   />
                 </div>
@@ -104,7 +105,7 @@ const EditPost = ({postId, posTitle, postContent, PostImage}) => {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={handlePost}>
+                onClick={handleUpdatePost}>
                 Update
               </button>
             </div>

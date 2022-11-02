@@ -17,7 +17,7 @@ router.get("/", checkUser, postController.getAllPosts);
 router.get("/:id", checkUser, postController.getSinglePost);
 router.delete("/:id", checkUser, postController.deletePost);
 
-// likes
-router.post("/makeasread/:id", checkUser, postController.makeAsRead);
+// 
+router.post("/makeasread/:id", checkUser, postController.makePostAsRead);
 
 module.exports = router;

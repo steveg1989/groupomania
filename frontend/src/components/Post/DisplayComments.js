@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../AppContext";
-import { useNavigate } from "react-router-dom";
 
 export default function DisplayComments({ postId }) {
   const [comments, setComments] = useState([]);
@@ -29,7 +28,7 @@ export default function DisplayComments({ postId }) {
     <>
       <div>
         <div className="comment">
-          <div className="">
+          <div className=""> 
             <>
               {comments.length > 0 ? (
                 ""

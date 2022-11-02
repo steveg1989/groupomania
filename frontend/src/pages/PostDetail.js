@@ -51,6 +51,23 @@ export default function DisplayPostDetails() {
     getPostDetails();
   }, []);
 
+  // make post as read
+  useEffect(() => {
+    const makePostAsReact = async () => {
+      await axios({
+        method: "post",
+        url: `http://localhost:3001/api/post/makeasread/${id}`,
+        withCredentials: true,
+      })
+        .then((res) => {
+          // get user data
+          console.log("post make as read...");
+        })
+        .catch((err) => console.log("Error man : ", err));
+    };
+    makePostAsReact();
+  }, []);
+
   return (
     <>
       <div>
@@ -111,7 +128,7 @@ export default function DisplayPostDetails() {
                                 postContent={postDetails.content}
                                 PostImage={postDetails.imageurl}
                                 postId={postDetails.id}
-                              />
+                              /> 
                             </div>
                           ) : (
                             ""
@@ -137,9 +154,7 @@ export default function DisplayPostDetails() {
                 );
               })}
               <div className="comments-block">
-
-                  <DisplayComments postId={id} />
-                
+                <DisplayComments postId={id} />
               </div>
             </>
           </div>
