@@ -20,7 +20,7 @@ export default function DisplayPosts() {
           // get user data
           setPosts(res.data);
         })
-        .catch((err) => console.log("Error: ", err));
+        .catch((err) => console.log(err));
     };
 
     getPosts();
@@ -40,19 +40,24 @@ export default function DisplayPosts() {
             <div
               className="media shadow-lg p-3 rounded my-3 mx-auto position-relative"
               style={{
-                backgroundColor:
-                  posts?.postsViewed?.map((postViewed) => {
-                    console.log("lllllooooooo", postViewed);
-                    if (
-                      postViewed.userId === userId &&
-                      postViewed.postId === post.id
-                    ) {
-                      return true;
-                    }
-                    return false;
-                  }) || post.userId === userId
-                    ? "#c1d9fc"
-                    : "#c1d9fc",
+                backgroundColor: `${
+                  post.userId === userId
+                    ? "white"
+                    : `${
+                        posts?.postsViewed?.lenght <= 0
+                          ? "#c1d9fc"
+                          : `${
+                              posts?.postsViewed?.find((postViewed) => {
+                                return (
+                                  postViewed.userId === userId &&
+                                  postViewed.postId === post.id
+                                ) 
+                              })
+                                ? "white"
+                                : "#c1d9fc"
+                            }`
+                      }`
+                }`,
               }}
               key={post.id}>
               <Link

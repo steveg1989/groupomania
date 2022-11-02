@@ -4,7 +4,6 @@ import { UserContext } from "../AppContext";
 import UploadImg from "./UploadImg";
 import UserInfos from "./UserInfos";
 
-// container for profile
 const UpdateProfile = () => {
     const dataUser = useContext(UserContext);
     // get user infos

@@ -31,7 +31,7 @@ module.exports.getAllPosts = async (req, res, next) => {
     if (err) res.status(404).json({ err });
 
     let posts = result;
-    var postsViewed;
+    let postsViewed;
 
     const sqlPostViewedRequest = `SELECT * FROM postsviewed`;
 
@@ -40,7 +40,6 @@ module.exports.getAllPosts = async (req, res, next) => {
         res.status(404).json({ err });
       }
       postsViewed = result;
-      console.log(posts, postsViewed);
       res.status(200).json({ posts: posts, postsViewed: postsViewed });
     });
   });
@@ -57,10 +56,9 @@ module.exports.getSinglePost = (req, res, next) => {
 
 // update post
 module.exports.updatePost = (req, res, next) => {
-  
   let sqlRequest = "";
 
-  if (req.file) { 
+  if (req.file) {
     sqlRequest = `UPDATE posts SET title = "${req.body.title}", content = "${req.body.content}", imageurl="/uploads/posts/${req.file.filename}" WHERE id = ${req.params.id}`;
   } else {
     sqlRequest = `UPDATE posts SET title = "${req.body.title}", content = "${req.body.content}", imageurl="${req.body.image_post}" WHERE id = ${req.params.id}`;
@@ -86,16 +84,34 @@ module.exports.deletePost = (req, res, next) => {
   });
 };
 
-
 // make post as read
 module.exports.makePostAsRead = (req, res, next) => {
+  const sqlPostsViewed = `SELECT * FROM postsviewed`;
 
-const sqlRequest = `INSERT INTO postsviewed (userId, postId ) VALUES ("${req.userId}", "${req.params.id}")`;
-
-  db.query(sqlRequest, (err, result) => {
+  db.query(sqlPostsViewed, (err, result) => {
     if (err) {
       res.status(404).json({ err });
     }
-    res.status(200).json(result);
+
+    const postWasView = result?.find((postViewed) => {
+      return (
+        postViewed.userId === req.userId &&
+        postViewed.postId === parseInt(req.params.id)
+      )
+    });
+
+
+    if (postWasView) {
+      return res.status(200).json(result);
+    }
+
+    const sqlRequest = `INSERT INTO postsviewed (userId, postId ) VALUES ("${req.userId}", "${req.params.id}")`;
+
+    db.query(sqlRequest, (err, result) => {
+      if (err) {
+        res.status(404).json({ err });
+      }
+      res.status(200).json(result);
+    });
   });
 };

@@ -13,8 +13,8 @@ const UserInfos = () => {
       baseURL: `${process.env.REACT_APP_API_URL}api/user/delete-account/${dataUserContext.dataProfile.userId}`,
       withCredentials: true,
     })
-      .then(() => {
-        window.location = "/";
+      .then((res) => {
+        if(res.status === 200) window.location = "/";
       })
       .catch((err) => console.log(err));
   };

@@ -33,7 +33,7 @@ export default function DisplayComments({ postId }) {
               {comments.length > 0 ? (
                 ""
               ) : (
-                <div className="my-3">"No comments Found"</div>
+                <div className="my-3">No comments Found</div>
               )}
 
               {comments.map((comments) => {

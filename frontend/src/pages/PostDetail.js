@@ -17,10 +17,6 @@ export default function DisplayPostDetails() {
 
   const userId = useContext(UserContext).dataProfile.userId;
 
-  if (!userId) {
-    navigate("/");
-  }
-
   // delete post
   const deletPost = async () => {
     await axios({
@@ -46,7 +42,7 @@ export default function DisplayPostDetails() {
           // get user data
           setPostDetails(res.data);
         })
-        .catch((err) => console.log("Error man : ", err));
+        .catch((err) => console.log(err));
     };
     getPostDetails();
   }, []);
@@ -60,10 +56,9 @@ export default function DisplayPostDetails() {
         withCredentials: true,
       })
         .then((res) => {
-          // get user data
-          console.log("post make as read...");
+          // 
         })
-        .catch((err) => console.log("Error man : ", err));
+        .catch((err) => console.log(err));
     };
     makePostAsReact();
   }, []);
@@ -122,7 +117,6 @@ export default function DisplayPostDetails() {
                             <div
                               style={{ cursor: "pointer" }}
                               className="text-primary text-decoration-underline">
-                              {" "}
                               <EditPost
                                 posTitle={postDetails.title}
                                 postContent={postDetails.content}
@@ -138,7 +132,6 @@ export default function DisplayPostDetails() {
                               onClick={deletPost}
                               style={{ cursor: "pointer" }}
                               className="text-danger ms-2 text-decoration-underline">
-                              {" "}
                               Delete
                             </div>
                           ) : (
