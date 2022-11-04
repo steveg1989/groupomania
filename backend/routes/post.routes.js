@@ -5,19 +5,19 @@ const { uploadPost } = require("../middlewares/multer-upload");
 
 // posts
 router.post(
-  "/",
+  "/", 
   checkUser,
   uploadPost.single("image_post"),
   postController.createPost
 );
+
+router.put("/:id", checkUser,uploadPost.single("image_post"), postController.updatePost);
+
 router.get("/", checkUser, postController.getAllPosts);
 router.get("/:id", checkUser, postController.getSinglePost);
-router.post("/:id", checkUser, postController.updatePost);
 router.delete("/:id", checkUser, postController.deletePost);
 
-// likes
-router.get("/likes/:id", checkUser, postController.numberOfLike);
-router.post("/likes/:id", checkUser, postController.alreadyLike);
-router.post("/like-unlike/:id", checkUser, postController.likeUnlike);
+// 
+router.post("/makeasread/:id", checkUser, postController.makePostAsRead);
 
 module.exports = router;

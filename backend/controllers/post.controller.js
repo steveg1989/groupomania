@@ -6,7 +6,7 @@ module.exports.createPost = async (req, res, next) => {
     title: req.body.title,
     content: req.body.content,
     username: req.body.username,
-    userId:req.userId,
+    userId: req.userId,
     imageurl: req.file ? "/uploads/posts/" + req.file.filename : "",
   };
   console.log("postsss:", req.body);
@@ -25,28 +25,47 @@ module.exports.createPost = async (req, res, next) => {
 };
 
 // get all posts
-module.exports.getAllPosts = (req, res, next) => {
+module.exports.getAllPosts = async (req, res, next) => {
   const sqlRequest = "SELECT * FROM posts ORDER BY id DESC";
-  console.log("get all !");
-  db.query(sqlRequest, (err, result) => {
+  await db.query(sqlRequest, async (err, result) => {
     if (err) res.status(404).json({ err });
-    console.log(result)
-    res.status(200).json(result);
+
+    let posts = result;
+    var postsViewed;
+
+    const sqlPostViewedRequest = `SELECT * FROM postsviewed`;
+
+    await db.query(sqlPostViewedRequest, (err, result) => {
+      if (err) {
+        res.status(404).json({ err });
+      }
+      postsViewed = result;
+      console.log(posts, postsViewed);
+      res.status(200).json({ posts: posts, postsViewed: postsViewed });
+    });
   });
 };
+
 // get single post
 module.exports.getSinglePost = (req, res, next) => {
   const sqlRequest = `SELECT * FROM posts WHERE id = ${req.params.id}`;
   db.query(sqlRequest, (err, result) => {
     if (err) res.status(404).json({ err });
-    console.log(result);
     res.status(200).json(result);
   });
 };
 
 // update post
 module.exports.updatePost = (req, res, next) => {
-  const sqlRequest = `UPDATE post SET post_message = "${req.body.textUpdate}" WHERE post_id = ${req.params.id}`;
+  
+  let sqlRequest = "";
+
+  if (req.file) { 
+    sqlRequest = `UPDATE posts SET title = "${req.body.title}", content = "${req.body.content}", imageurl="/uploads/posts/${req.file.filename}" WHERE id = ${req.params.id}`;
+  } else {
+    sqlRequest = `UPDATE posts SET title = "${req.body.title}", content = "${req.body.content}", imageurl="${req.body.image_post}" WHERE id = ${req.params.id}`;
+  }
+
   db.query(sqlRequest, (err, result) => {
     if (err) {
       res.status(404).json({ err });
@@ -57,20 +76,8 @@ module.exports.updatePost = (req, res, next) => {
 
 // delete post and all the comments
 module.exports.deletePost = (req, res, next) => {
-  const sqlRequest = `DELETE FROM posts WHERE id = ${req.params.id}`;
-  
-    db.query(sqlRequest, (err, result) => {
-      if (err) {
-        res.status(404).json({ err });
-      }
-      res.status(200).json(result);
-    });
-  }
+  const sqlRequest = `DELETE FROM posts id = ${req.params.id}`;
 
-
-//number of like(s)
-module.exports.numberOfLike = (req, res, next) => {
-  const sqlRequest = `SELECT * FROM heart WHERE post_id = ${req.params.id}`;
   db.query(sqlRequest, (err, result) => {
     if (err) {
       res.status(404).json({ err });
@@ -79,46 +86,16 @@ module.exports.numberOfLike = (req, res, next) => {
   });
 };
 
-// does user already like
-module.exports.alreadyLike = (req, res, next) => {
-  const sqlRequest = `SELECT post_id, user_id FROM heart WHERE user_id = ${req.body.userId} AND post_id = ${req.params.id}`;
-  db.query(sqlRequest, (err, result) => {
-    if (err) {
-      res.status(404).json({ err });
-    }
-    if (result.length === 0) {
-      res.status(200).json(false);
-    } else {
-      res.status(200).json(true);
-    }
-  });
-};
 
-// like post
-module.exports.likeUnlike = (req, res, next) => {
-  const sqlRequest = `SELECT post_id, user_id FROM heart WHERE user_id = ${req.body.userId} AND post_id = ${req.params.id}`;
+// make post as read
+module.exports.makePostAsRead = (req, res, next) => {
+
+const sqlRequest = `INSERT INTO postsviewed (userId, postId ) VALUES ("${req.userId}", "${req.params.id}")`;
+
   db.query(sqlRequest, (err, result) => {
     if (err) {
       res.status(404).json({ err });
     }
-    if (result.length === 0) {
-      const sqlRequest = `INSERT INTO heart (user_id, post_id) VALUES (${req.body.userId}, ${req.params.id})`;
-      db.query(sqlRequest, (err, result) => {
-        if (err) {
-          res.status(404).json({ err });
-          throw err;
-        }
-        res.status(200).json(true);
-      });
-    } else {
-      const sqlRequest = `DELETE FROM heart WHERE user_id = ${req.body.userId} AND post_id = ${req.params.id}`;
-      db.query(sqlRequest, (err, result) => {
-        if (err) {
-          res.status(404).json(err);
-          throw err;
-        }
-        res.status(200).json(false);
-      });
-    }
+    res.status(200).json(result);
   });
 };
