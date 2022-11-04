@@ -100,7 +100,6 @@ module.exports.makePostAsRead = (req, res, next) => {
       )
     });
 
-
     if (postWasView) {
       return res.status(200).json(result);
     }

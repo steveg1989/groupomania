@@ -25,7 +25,7 @@ export default function DisplayPosts() {
 
     getPosts();
   }, []);
-
+ 
   return (
     <>
       {posts?.posts?.length > 0 ? (
