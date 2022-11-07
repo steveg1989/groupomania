@@ -3,7 +3,7 @@ const multer = require("multer");
 //save profile image
 const storageProfile = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb( null, "uploads");
+    cb( null, "D:\\groupomania\\backend\\uploads");
   },
   filename: function (req, file, cb) {
     console.log("before upload image", file);
@@ -14,7 +14,7 @@ const storageProfile = multer.diskStorage({
 //save post image
 const storagePost = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb( null, "uploads/posts");
+    cb( null, "/uploads/posts");
   },
   filename: function (req, file, cb) {
     console.log("before upload image", file);

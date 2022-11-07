@@ -27,7 +27,7 @@ module.exports.updateImgProfile = async (req, res) => {
   console.log("after upload image", req.file);
   try {
     const sqlRequest = `UPDATE users SET imageurl = "${
-      "/uploads/" + req.file.filename
+      "D:\\groupomania\\backend\\uploads\\" + req.file.filename
     }" WHERE userId = ${req.userId}`;
     db.query(sqlRequest, (err, result) => {
       if (err) {

@@ -40,7 +40,6 @@ module.exports.getAllPosts = async (req, res, next) => {
         res.status(404).json({ err });
       }
       postsViewed = result;
-      console.log(posts, postsViewed);
       res.status(200).json({ posts: posts, postsViewed: postsViewed });
     });
   });
@@ -76,7 +75,7 @@ module.exports.updatePost = (req, res, next) => {
 
 // delete post and all the comments
 module.exports.deletePost = (req, res, next) => {
-  const sqlRequest = `DELETE FROM posts id = ${req.params.id}`;
+  const sqlRequest = `DELETE FROM posts WHERE id = ${req.params.id}`;
 
   db.query(sqlRequest, (err, result) => {
     if (err) {
@@ -86,16 +85,33 @@ module.exports.deletePost = (req, res, next) => {
   });
 };
 
-
 // make post as read
 module.exports.makePostAsRead = (req, res, next) => {
+  const sqlPostsViewed = `SELECT * FROM postsviewed`;
 
-const sqlRequest = `INSERT INTO postsviewed (userId, postId ) VALUES ("${req.userId}", "${req.params.id}")`;
-
-  db.query(sqlRequest, (err, result) => {
+  db.query(sqlPostsViewed, (err, result) => {
     if (err) {
       res.status(404).json({ err });
     }
-    res.status(200).json(result);
+
+    const postWasView = result?.find((postViewed) => {
+      return (
+        postViewed.userId === req.userId &&
+        postViewed.postId === parseInt(req.params.id)
+      )
+    });
+
+    if (postWasView) {
+      return res.status(200).json(result);
+    }
+
+    const sqlRequest = `INSERT INTO postsviewed (userId, postId ) VALUES ("${req.userId}", "${req.params.id}")`;
+
+    db.query(sqlRequest, (err, result) => {
+      if (err) {
+        res.status(404).json({ err });
+      }
+      res.status(200).json(result);
+    });
   });
 };
