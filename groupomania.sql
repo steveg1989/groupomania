@@ -92,7 +92,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Steve','Garner','steveg1989@gmail.com','12345678','');
+INSERT INTO `users` VALUES (1,'Steve','Garner','steveg1989@gmail.com','12345678','$2b$10$FF.IEr6vg0XNx7nWycnKBunXrtunKaGGWkZjk60pSc.zxufZFtucC',0,'2022-11-19 13:26:26','2022-11-21 13:26:26'),(2,'Bill','Lumbergh','Bill@gmail.com','bill12345',$2b$10$6HoBYHl.40dDTN/lEeUXKuMiGZ76mJ1IWVEikgRntDVJTZchzjtju',0,'2022-11-19 13:26:43','2022-11-19 13:26:43'),(3,'Samir','Nagheenanajar','Samir1989@gmail.com','Samir1989','$2b$10$WBYhXeLOrTiJtcdbs0TWfOVYULpTA6N2fMeKSTiBVP4EZUfzacGaG',0,'2022-11-19 13:27:13','2020-11-19 13:27:13');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
